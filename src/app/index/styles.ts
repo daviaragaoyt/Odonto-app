@@ -2,121 +2,105 @@ import { StyleSheet } from "react-native";
 
 export const styles=StyleSheet.create({
     body: {
-        width: '100%',
-        height: 1000,
-        flex: 1,
+     
+      width: '100%',
+      height: '100%',
+      flex: 1,
+     
+    },
+    backgroundImage: {
+      flex: 1,
+      resizeMode: 'cover',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    overlay: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      backgroundColor: 'rgba(255, 255, 255, 0.2)', // Exemplo de sobreposição semi-transparente
+      padding: 20,
+    },
+    image: {
+      marginTop:100,
+      width: 450,
+      height: 200,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    nome: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'contain',
+    },
     
-      },
-      backgroundImage: {
-        flex: 1,
-        resizeMode: 'cover',
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      overlay: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height:'  100%',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)', 
-        padding: 20,
-    
-      },
-      image: {
-        marginTop:100,
-        width: 450,
-        height: 150,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      nome: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'contain',
-      },
-      searchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderTopLeftRadius: 6,
-        borderBottomLeftRadius: 6,
-        width: '80%',
-        borderWidth: 1,
-        borderColor: '#1CAAFA',
-        borderRadius: 10,
-        backgroundColor: '#fff',
-      },
-      input: {
-        flex: 1,
-        height: 40,
-        fontSize: 20,
-        borderWidth: 1,
-        borderColor: "transparent",
-        color: "black",
-        padding: 5,
-        borderRadius: 6,
-        backgroundColor: '#f9fdfe',
-      },
-      searchButton: {
-        borderWidth: 1,
-        borderColor: '#334EA0',
-        height: 40,
-        paddingHorizontal: 10,
-        backgroundColor: '#6DB1D7',
-        borderTopRightRadius: 6,
-        borderBottomRightRadius: 6,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      container2: {
-        marginTop: 100,
-        width: '80%', 
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: '#000', // Cor da sombra
-        shadowOffset: { width: 0, height: 2 }, // Deslocamento da sombra
-        shadowOpacity: 0.2, // Opacidade da sombra
-        shadowRadius: 2, // Raio da sombra
-        elevation: 2, // Elevação para sombra no Android
-      },
-      inputSubmit: {
-        textAlign: "center",
-        justifyContent: "center",
-        alignContent: "center",
-        height: 100,
-        width: '100%', 
-        borderRadius: 10,
-        borderColor: '#334EA0',
-        borderWidth: 1,
-        marginBottom: 50,
-        color: "#fff",
-        backgroundColor: "#6DB1D7",
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        elevation: 2,
-      },
-      buttonText: {
-        color: "#fff",
-        fontSize: 25,
-        textAlign: "center",
-        shadowColor: '#000', // Cor da sombra
-        shadowOffset: { width: 0, height: 5 }, // Deslocamento da sombra
-        shadowOpacity: 0.1, // Opacidade da sombra
-        shadowRadius: 10, // Raio da sombra
-        elevation: 2, // Elevação para sombra no Android
-      },
+    searchContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 20,
+      borderWidth: 1,
+      borderColor: '#1CAAFA',
+      borderRadius: 5,
+      backgroundColor: '#fff',
+      borderTopRightRadius:6,
+      borderBottomRightRadius:6,
+    },
+    input: {
+      flex: 1,
+      height: 40,
+      borderRadius: 5,
+      borderTopRightRadius:6,
+      borderBottomRightRadius:6,
+      fontSize: 20,
+     
+      color: "black",
+      padding: 5,
+      backgroundColor: '#f9fdfe'
+    },
+    searchButton: {
+      borderWidth: 1,
+      borderColor: '#334EA0',
+      height: 40,
+      padding: 10,
+      backgroundColor: '#6DB1D7',
+      borderRadius: 1,
+      borderTopRightRadius:6,
+      borderBottomRightRadius:6,
       
-      logo: {
-        marginTop: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      logoImage: {
-        width: 100,
-        height: 100,
-        marginBottom:50,
-      },
-    
-})
+    },
+    container2: {
+      marginTop: 20,
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    inputSubmit: {
+      textAlign: "center",
+      justifyContent: "center",
+      alignContent: "center",
+      height: 70,
+      width: '80%',
+      borderRadius: 10,
+      borderColor: '#334EA0',
+      borderWidth: 1,
+      marginBottom: 20,
+      marginTop:50,
+      paddingHorizontal: 5,
+      color: "#fff",
+      backgroundColor: "#6DB1D7",
+    },
+    buttonText: {
+      color: "#fff",
+      fontSize: 20,
+      textAlign: "center",
+    },
+    logo: {
+      alignItems:"center",
+      width: 200,
+      marginTop:50,
+      
+      resizeMode: 'contain',
+    },
+
+  });

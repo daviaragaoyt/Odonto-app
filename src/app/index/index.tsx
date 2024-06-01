@@ -31,7 +31,7 @@ export default function Index() {
               placeholder="Codigo do Paciente"
 
             />
-            <TouchableOpacity style={styles.searchButton}>
+            <TouchableOpacity style={styles.searchButton} >
               <Feather
                 name="search"
                 size={20}
@@ -53,11 +53,13 @@ export default function Index() {
             >
               <Text style={styles.buttonText}>Estátisticas</Text>
             </TouchableOpacity>
+
           </View>
+
           <View style={styles.logo}>
             <Image
               source={require("../../../assets/images/logo.png")}
-              style={styles.logoImage}
+              
             />
           </View>
         </View>
