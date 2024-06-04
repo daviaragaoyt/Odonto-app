@@ -1,24 +1,18 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  body: {
-    width: '100%',
-    height: '100%',
+  container: {
+    flex: 1,
     backgroundColor: '#1CAAFA', // Cor de fundo para garantir que não haja espaço branco
   },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
+  overlayContent: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  overlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    padding: 20,
-    backgroundColor: 'transparent', // Garantir que o fundo seja transparente
   },
   image: {
     width: 450,
@@ -56,8 +50,8 @@ export const styles = StyleSheet.create({
     height: 40,
     padding: 10,
     backgroundColor: '#6DB1D7',
-    borderTopRightRadius: 6,
-    borderBottomRightRadius: 6,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
   },
   container2: {
     marginTop: 20,
@@ -66,12 +60,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputSubmit: {
-    textAlign:'center',
+    textAlign: 'center',
     justifyContent: "center",
     alignItems: "center",
     height: 70,
     width: '80%',
-    padding:15,
+    padding: 15,
     borderRadius: 10,
     borderColor: '#334EA0',
     borderWidth: 1,
@@ -83,7 +77,6 @@ export const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 25,
-   
   },
   logo: {
     alignItems: "center",
