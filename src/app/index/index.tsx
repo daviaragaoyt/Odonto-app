@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps } from 'react-native';
+import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps,StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import Feather from 'react-native-vector-icons/Feather';
 import { styles } from './styles';
@@ -30,6 +30,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
+       <StatusBar barStyle={'dark-content'}/>
       <Body />
       <View style={styles.overlayContent}>
         <View style={styles.image}>

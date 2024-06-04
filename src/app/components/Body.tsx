@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, ImageBackground, StyleSheet } from 'react-native';
+import { View, ImageBackground, StyleSheet,StatusBar } from 'react-native';
 
 const Body: React.FC = () => {
   return (
     <ImageBackground source={require('../../../assets/images/body.png')} style={styles.backgroundImage}>
+       <StatusBar barStyle={'dark-content'}/>
       <View style={styles.overlay} />
     </ImageBackground>
   );

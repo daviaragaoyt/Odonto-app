@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight } from 'react-native';
+import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar } from 'react-native';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import CustomText from '../components/CustomText';
 import Body from '../components/Body';
@@ -32,6 +32,7 @@ export default function Index() {
   return (
     
     <View style={styles.container}>
+      <StatusBar barStyle={'dark-content'}/>
      
        <Body />
       <View style={styles.overlayContent}>
