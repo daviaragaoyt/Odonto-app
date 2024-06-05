@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar } from 'react-native';
+import { useRouter } from 'expo-router'; // Importar o hook useRouter
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import CustomText from '../components/CustomText';
 import Body from '../components/Body';
 import { styles } from './styles';
 
 export default function Index() {
+  const router = useRouter(); // Inicializar o hook useRouter
+
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
   const [cpf, setCPF] = useState('');
@@ -29,14 +32,16 @@ export default function Index() {
     return <View><CustomText>Carregando...</CustomText></View>;
   }
 
+
   return (
-    
     <View style={styles.container}>
-      <StatusBar barStyle={'dark-content'}/>
-     
-       <Body />
+      <StatusBar barStyle={'dark-content'} />
+      <Body />
+      <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()}>
+        <CustomText style={styles.smallSquareButtonText}>←</CustomText>
+      </TouchableOpacity>
       <View style={styles.overlayContent}>
-      <CustomText style={styles.title}>CADASTRO</CustomText>
+        <CustomText style={styles.title}>CADASTRO</CustomText>
         <View style={styles.formContainer}>
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>CÓDIGO:</CustomText>
@@ -57,7 +62,7 @@ export default function Index() {
           </View>
 
           <View style={styles.inputContainer}>
-            <CustomText style={styles.text}>CPF:</CustomText>
+            <CustomText style={styles.text}>CPF:      </CustomText>
             <TextInput
               style={styles.input}
               onChangeText={setCPF}
@@ -74,8 +79,12 @@ export default function Index() {
             />
           </View>
 
-          <CustomText style={styles.text} onPress={() => setModalVisible(true)}>Selecione o gênero: {genero || 'Selecione'}</CustomText>
+          <View style={styles.inputContainer}>
+            <CustomText style={styles.text}>SEXO:{genero}</CustomText>
+            <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.input} >
 
+            </TouchableOpacity>
+          </View>
           <Modal
             animationType="slide"
             transparent={true}
@@ -85,6 +94,7 @@ export default function Index() {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <TouchableHighlight
+
                   onPress={() => {
                     setGenero('Masculino');
                     setModalVisible(false);
@@ -101,6 +111,7 @@ export default function Index() {
                   <Text>Feminino</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
+
                   onPress={() => setModalVisible(false)}
                 >
                   <Text>Cancelar</Text>
@@ -108,11 +119,10 @@ export default function Index() {
               </View>
             </View>
           </Modal>
-
-          <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-            <CustomText style={styles.buttonText}>Enviar</CustomText>
-          </TouchableOpacity>
         </View>
+        <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
+          <CustomText style={styles.buttonText}>Enviar</CustomText>
+        </TouchableOpacity>
       </View>
     </View>
   );

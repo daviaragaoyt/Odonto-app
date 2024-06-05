@@ -48,9 +48,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: '80%',
     height: 70,
-    borderRadius: 35,
-    padding: 15,
-    borderWidth: 3,
+    marginBottom: 100,
+    borderRadius: 50, // O valor deve ser a metade da altura para formar um oval deitado
+    paddingHorizontal: 30, // Ajustar o preenchimento horizontal para centralizar o texto
+     borderWidth: 3,
     borderColor: "#6DB1D796",
     backgroundColor: "#6DB1D7",
   },
@@ -78,5 +79,33 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5
+  },
+  backButton: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25, // Forma oval
+    backgroundColor: '#334EA0',
+    marginTop: 20,
+    width: '80%',
+  },
+  backButtonText: {
+    color: '#fff',
+    fontSize: 18,
+  },
+  smallSquareButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#6DB1D7',
+    borderRadius: 5, // Pequeno botão quadrado
+  },
+  smallSquareButtonText: {
+    color: '#fff',
+    fontSize: 18,
   },
 });

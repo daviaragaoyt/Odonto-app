@@ -53,8 +53,8 @@ export default function Index() {
           </TouchableOpacity>
         </View>
         <View style={styles.container2}>
-          <CustomButton text="Cadastro" onPress={() => router.push('../cadastro/index')} />
-          <CustomButton text="Estatísticas" onPress={() => router.push('../estatisticas/index')} />
+          <CustomButton text="Cadastro" onPress={() => router.push('cadastro')} />
+          <CustomButton text="Estatísticas" onPress={() => router.push('estatisticas')} />
         </View>
         <View style={styles.logo}>
           <Image
