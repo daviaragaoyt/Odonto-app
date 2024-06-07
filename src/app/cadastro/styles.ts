@@ -12,14 +12,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    marginTop:50,
     color: '#fff',
     fontSize: 40,
+    textShadowColor: '#000000',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 2,
   },
   text: {
     color: '#fff',
     fontSize: 20,
     marginRight: 50,
-    textShadowColor: '#334EA0',
+    textShadowColor: '#000000BF',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 1,
   },
@@ -46,29 +50,38 @@ export const styles = StyleSheet.create({
 
   },
   input: {
-    flex: 1,
-    height: 40,
+    borderWidth: 1,
+    borderColor: '#1CAAFA',
     borderRadius: 5,
+    backgroundColor: '#fff',
+    flex: 1,
+    width:200,
+    height: 40,
+  
     fontSize: 20,
     color: "black",
     padding: 5,
-    backgroundColor: '#f9fdfe',
   },
   inputSubmit: {
+    textAlign: 'center',
     justifyContent: "center",
     alignItems: "center",
-    width: '80%',
     height: 70,
+    width: 300,
+    padding: 15,
+    borderRadius: 10,
+    borderColor: '#334EA0',
+    borderWidth: 1,
     marginBottom: 100,
-    borderRadius: 50, // O valor deve ser a metade da altura para formar um oval deitado
-    paddingHorizontal: 30, // Ajustar o preenchimento horizontal para centralizar o texto
-     borderWidth: 3,
-    borderColor: "#6DB1D796",
+    paddingHorizontal: 5,
     backgroundColor: "#6DB1D7",
   },
   buttonText: {
     color: "#fff",
     fontSize: 25,
+    textShadowColor: '#334EA0',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
   centeredView: {
     flex: 1,
@@ -119,5 +132,12 @@ export const styles = StyleSheet.create({
   smallSquareButtonText: {
     color: '#fff',
     fontSize: 18,
+  },
+   modalOption: {
+    width: '100%',
+    padding: 15,
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
 });

@@ -43,6 +43,8 @@ export const styles = StyleSheet.create({
     color: "black",
     padding: 5,
     backgroundColor: '#f9fdfe',
+   
+    
   },
   searchButton: {
     borderWidth: 1,
@@ -58,6 +60,8 @@ export const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    fontSize: 50,
+    
   },
   inputSubmit: {
     textAlign: 'center',
@@ -77,11 +81,16 @@ export const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 25,
+    textShadowColor: '#334EA0',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
+  },
+  logoContainer: {
+    alignItems: "center",
+    marginTop: 30,
   },
   logo: {
-    alignItems: "center",
     width: 200,
-    marginTop: 50,
     resizeMode: 'contain',
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar } from 'react-native';
+import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert } from 'react-native';
 import { useRouter } from 'expo-router'; // Importar o hook useRouter
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import CustomText from '../components/CustomText';
@@ -17,11 +17,19 @@ export default function Index() {
   const [genero, setGenero] = useState('');
 
   const handleSubmit = () => {
+    if (!id || !nome || !cpf || !idade || !genero) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      return;
+    }
+
     console.log('ID:', id);
     console.log('Nome:', nome);
     console.log('CPF:', cpf);
     console.log('Idade:', idade);
     console.log('Gênero:', genero);
+
+    // Navegar de volta para a página inicial após o envio bem-sucedido
+    router.replace('/');
   };
 
   let [fontsLoaded] = useFonts({
@@ -61,7 +69,7 @@ export default function Index() {
           </View>
 
           <View style={styles.inputContainer}>
-            <CustomText style={styles.text}>CPF:      </CustomText>
+            <CustomText style={styles.text}>CPF:</CustomText>
             <TextInput
               style={styles.input}
               onChangeText={setCPF}
@@ -98,6 +106,7 @@ export default function Index() {
                     setGenero('Masculino');
                     setModalVisible(false);
                   }}
+                  style={styles.modalOption}
                 >
                   <Text>Masculino</Text>
                 </TouchableHighlight>
@@ -106,11 +115,13 @@ export default function Index() {
                     setGenero('Feminino');
                     setModalVisible(false);
                   }}
+                  style={styles.modalOption}
                 >
                   <Text>Feminino</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   onPress={() => setModalVisible(false)}
+                  style={styles.modalOption}
                 >
                   <Text>Cancelar</Text>
                 </TouchableHighlight>
@@ -120,9 +131,11 @@ export default function Index() {
         </View>
 
         <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-          <CustomText style={styles.buttonText}>Enviar</CustomText>
+          <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
+
+

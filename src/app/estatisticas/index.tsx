@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Image } from 'react-native';
+import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Image,Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import CustomText from '../components/CustomText';
@@ -17,6 +17,10 @@ export default function Index() {
   const [genero, setGenero] = useState('');
 
   const handleSubmit = () => {
+    if (!id || !nome || !cpf || !idade || !genero) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      return;
+    }
     console.log('ID:', id);
     console.log('Nome:', nome);
     console.log('CPF:', cpf);
@@ -56,7 +60,7 @@ export default function Index() {
               value={id}
             />
           </View>
-          <CustomText style={styles.title}>DENTE</CustomText>
+          <CustomText style={styles.title}>DENTES</CustomText>
 
           <View style={styles.denteContainer}>
             <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.selectButtonContainer}>
@@ -118,19 +122,27 @@ export default function Index() {
               <View style={styles.modalView}>
                 <TouchableHighlight
                   onPress={() => {
-                    setGenero('Masculino');
+                    setGenero('1');
                     setModalVisible(false);
                   }}
                 >
-                  <Text>Masculino</Text>
+                  <Text>1</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   onPress={() => {
-                    setGenero('Feminino');
+                    setGenero('2');
                     setModalVisible(false);
                   }}
                 >
-                  <Text>Feminino</Text>
+                  <Text>2</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  onPress={() => {
+                    setGenero('3');
+                    setModalVisible(false);
+                  }}
+                >
+                  <Text>3</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   onPress={() => setModalVisible(false)}
@@ -142,7 +154,7 @@ export default function Index() {
           </Modal>
         </View>
         <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-            <CustomText style={styles.buttonText}>Enviar</CustomText>
+            <CustomText style={styles.buttonText}>RESULTADO</CustomText>
           </TouchableOpacity>
       </View>
     </View>

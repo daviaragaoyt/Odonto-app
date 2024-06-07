@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps,StatusBar } from 'react-native';
+import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import Feather from 'react-native-vector-icons/Feather';
 import { styles } from './styles';
@@ -30,7 +30,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-       <StatusBar barStyle={'dark-content'}/>
+      <StatusBar barStyle={'dark-content'} />
       <Body />
       <View style={styles.overlayContent}>
         <View style={styles.image}>
@@ -53,12 +53,21 @@ export default function Index() {
           </TouchableOpacity>
         </View>
         <View style={styles.container2}>
-          <CustomButton text="Cadastro" onPress={() => router.push('cadastro')} />
-          <CustomButton text="Estatísticas" onPress={() => router.push('estatisticas')} />
+          <TouchableOpacity style={styles.inputSubmit}  onPress={() => router.push('cadastro')} >
+          <CustomText style={styles.buttonText}>
+          CADASTRO
+          </CustomText>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.inputSubmit}  onPress={() => router.push('estatisticas')} >
+            <CustomText style={styles.buttonText}>
+            ESTATÍSTICAS
+            </CustomText>
+          </TouchableOpacity>
         </View>
-        <View style={styles.logo}>
+        <View style={styles.logoContainer}>
           <Image
             source={require("../../../assets/images/logo.png")}
+            style={styles.logo}
           />
         </View>
       </View>
