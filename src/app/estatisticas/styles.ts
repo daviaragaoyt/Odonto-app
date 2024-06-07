@@ -40,17 +40,19 @@ export const styles = StyleSheet.create({
   },
 
   denteContainer: {
-    flex:1,
-   alignItems:'center',
+    flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap', // Permite que os itens quebrem para a próxima linha
+    flexWrap: 'wrap',
     justifyContent: 'space-around',
+    alignItems: 'center',
+    marginVertical: 20,
   },
   selectButtonContainer: {
+    marginTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 60,
-    marginHorizontal: 5, // Espaçamento horizontal entre os itens
+    width: '40%',
+    marginVertical: 10,
   },
   text: {
     color: '#fff',
@@ -60,10 +62,10 @@ export const styles = StyleSheet.create({
     textShadowRadius: 1,
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     resizeMode: 'contain',
-    marginLeft: 5,
+
   },
   formContainer: {
     flex: 1,
@@ -90,7 +92,21 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#1CAAFA',
     backgroundColor: '#fff',
-    width:200,
+    width: 200,
+    fontSize: 20,
+    color: "black",
+    padding: 5,
+  },
+  inputDente: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    flex: 1,
+    height: 30,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#1CAAFA',
+    backgroundColor: '#fff',
+    width: 50,
     fontSize: 20,
     color: "black",
     padding: 5,
@@ -157,5 +173,4 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
   },
- 
 });

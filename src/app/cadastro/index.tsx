@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert } from 'react-native';
 import { useRouter } from 'expo-router'; // Importar o hook useRouter
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
+import MaskInput from 'react-native-mask-input';
 import CustomText from '../components/CustomText';
 import Body from '../components/Body';
 import { styles } from './styles';
@@ -13,8 +14,14 @@ export default function Index() {
   const [nome, setNome] = useState('');
   const [cpf, setCPF] = useState('');
   const [idade, setIdade] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
   const [genero, setGenero] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const sexo = [
+    { id: 1, texto: 'Feminino' },
+    { id: 2, texto: 'Masculino' },
+    { id: 3, texto: 'Voltar' },
+  ];
 
   const handleSubmit = () => {
     if (!id || !nome || !cpf || !idade || !genero) {
@@ -40,6 +47,8 @@ export default function Index() {
     return <View><CustomText>Carregando...</CustomText></View>;
   }
 
+  const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
@@ -53,6 +62,7 @@ export default function Index() {
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>CÓDIGO:</CustomText>
             <TextInput
+              keyboardType='numeric'
               style={styles.input}
               onChangeText={setId}
               value={id}
@@ -70,16 +80,22 @@ export default function Index() {
 
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>CPF:</CustomText>
-            <TextInput
+            <MaskInput
+              keyboardType='numeric'
+              placeholder='000.000.000-00'
               style={styles.input}
-              onChangeText={setCPF}
               value={cpf}
+              onChangeText={(masked, unmasked) => {
+                setCPF(masked); // store masked value in state
+              }}
+              mask={CPF_MASK}
             />
           </View>
 
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>IDADE:</CustomText>
             <TextInput
+              keyboardType='numeric'  
               style={styles.input}
               onChangeText={setIdade}
               value={idade}
@@ -88,54 +104,46 @@ export default function Index() {
 
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>SEXO:</CustomText>
-            <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.input}>
+            <TouchableOpacity style={styles.input} onPress={() => setModalVisible(true)}>
               <CustomText style={styles.textSelected}>{genero || 'Selecionar'}</CustomText>
             </TouchableOpacity>
           </View>
 
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <TouchableHighlight
-                  onPress={() => {
-                    setGenero('Masculino');
-                    setModalVisible(false);
-                  }}
-                  style={styles.modalOption}
-                >
-                  <Text>Masculino</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  onPress={() => {
-                    setGenero('Feminino');
-                    setModalVisible(false);
-                  }}
-                  style={styles.modalOption}
-                >
-                  <Text>Feminino</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  onPress={() => setModalVisible(false)}
-                  style={styles.modalOption}
-                >
-                  <Text>Cancelar</Text>
-                </TouchableHighlight>
-              </View>
-            </View>
-          </Modal>
         </View>
 
         <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
           <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
         </TouchableOpacity>
+
+        {/* Modal para seleção de gênero */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              {sexo.map(item => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => {
+                    if(item.texto !== 'Voltar') {
+                      setGenero(item.texto);
+                    }
+                    setModalVisible(!modalVisible);
+                  }}
+                 
+                >
+                  <Text >{item.texto}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </Modal>
       </View>
     </View>
   );
 }
-
-
