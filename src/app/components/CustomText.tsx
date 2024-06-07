@@ -8,9 +8,9 @@ const CustomText: React.FC<TextProps> = (props) => {
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'LilitaOne_400Regular',
-    textShadowColor: '#334EA0',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 1,
+  },
+  textSelected:{
+    fontFamily: 'LilitaOne_400Regular',
   },
 });
 

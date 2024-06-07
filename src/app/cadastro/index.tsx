@@ -32,7 +32,6 @@ export default function Index() {
     return <View><CustomText>Carregando...</CustomText></View>;
   }
 
-
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
@@ -80,11 +79,12 @@ export default function Index() {
           </View>
 
           <View style={styles.inputContainer}>
-            <CustomText style={styles.text}>SEXO:{genero}</CustomText>
-            <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.input} >
-
+            <CustomText style={styles.text}>SEXO:</CustomText>
+            <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.input}>
+              <CustomText style={styles.textSelected}>{genero || 'Selecionar'}</CustomText>
             </TouchableOpacity>
           </View>
+
           <Modal
             animationType="slide"
             transparent={true}
@@ -94,7 +94,6 @@ export default function Index() {
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <TouchableHighlight
-
                   onPress={() => {
                     setGenero('Masculino');
                     setModalVisible(false);
@@ -111,7 +110,6 @@ export default function Index() {
                   <Text>Feminino</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
-
                   onPress={() => setModalVisible(false)}
                 >
                   <Text>Cancelar</Text>
@@ -120,6 +118,7 @@ export default function Index() {
             </View>
           </Modal>
         </View>
+
         <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
           <CustomText style={styles.buttonText}>Enviar</CustomText>
         </TouchableOpacity>

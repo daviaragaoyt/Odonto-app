@@ -18,8 +18,19 @@ export const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 20,
-    marginRight: 50
+    marginRight: 50,
+    textShadowColor: '#334EA0',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
+  textSelected:{
+    color:'#000',
+    textShadowColor: '#fff',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
+    fontSize:20,
+  },
+  
   formContainer: {
     flex: 1,
 
@@ -71,6 +82,7 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
+    color:'#000',
     shadowColor: "#fff",
     shadowOffset: {
       width: 0,
