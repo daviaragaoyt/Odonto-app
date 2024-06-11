@@ -26,8 +26,8 @@ export default function Index() {
 
   const handleSubmit = () => {
     console.log("asdasdasdasda");
-    router.push("resultados/resultado3");
-  };
+    router.push("resultados/resultado1");
+  };  
 
   let [fontsLoaded] = useFonts({
     LilitaOne_400Regular,

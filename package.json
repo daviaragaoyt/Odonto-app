@@ -3,8 +3,8 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start --tunnel --port=19000",
-    "android": "expo start --tunnel --port=19000 --android ",
+    "start": "expo start --tunnel --port=3535",
+    "android": "expo start --tunnel --port=3535 --android ",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll"

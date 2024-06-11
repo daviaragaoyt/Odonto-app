@@ -44,7 +44,7 @@ export default function Index() {
             style={styles.input}
             placeholder="Codigo do Paciente"
           />
-          <TouchableOpacity style={styles.searchButton}>
+          <TouchableOpacity style={styles.searchButton}  onPress={() => router.push('estatisticas')}>
             <Feather
               name="search"
               size={20}
@@ -58,7 +58,7 @@ export default function Index() {
           CADASTRO
           </CustomText>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.inputSubmit}  onPress={() => router.push('estatisticas')} >
+          <TouchableOpacity style={styles.inputSubmit}  >
             <CustomText style={styles.buttonText}>
             ESTATÍSTICAS
             </CustomText>
