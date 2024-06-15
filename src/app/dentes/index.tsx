@@ -4,6 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   Modal,
+  Alert,
   Text,
   StatusBar,
   Image,
@@ -19,29 +20,46 @@ export default function Index() {
 
   const [id, setId] = useState("");
   const [nome, setNome] = useState("");
-  
+
   // Inicializando as notas dos dentes
   const [opcoesDentes, setOpcoesDentes] = useState([
-    { numero: "V11", nota: null },
-    { numero: "V16", nota: null },
-    { numero: "V26", nota: null },
-    { numero: "V31", nota: null },
-    { numero: "L36", nota: null },
-    { numero: "L46", nota: null },
+    { id: 1, dente: "V11", nota: null },
+    { id: 2, dente: "V16", nota: null },
+    { id: 3, dente: "V26", nota: null },
+    { id: 4, dente: "V31", nota: null },
+    { id: 5, dente: "L36", nota: null },
+    { id: 6, dente: "L46", nota: null },
   ]);
 
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar a visibilidade do modal dos dentes
   const [selectedDenteIndex, setSelectedDenteIndex] = useState(-1); // Estado para armazenar o índice do dente selecionado (-1 indica nenhum dente selecionado)
 
-  const handleSubmit = () => {
-    // Verifica se todas as notas dos dentes estão preenchidas
-    if (opcoesDentes.every(dente => dente.nota !== null)) {
-      console.log("Todas as notas foram preenchidas:", opcoesDentes);
-      router.push("resultados/resultado1");
-    } else {
-      console.log("Por favor, preencha todas as notas dos dentes.");
+  const handleSubmit = async () => {
+    if (!id || !opcoesDentes ) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      return("index");
+    }
+    
+    try {
+      const response = await fetch('http://192.168.1.5:3535/teste', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cod_paciente: id,
+          dentinho:opcoesDentes[1].id,
+        }),
+      });
+  
+        console.log(id,opcoesDentes)
+    
+    } catch (error) {
+      console.error('Erro ao cadastrar paciente:', error);
+      Alert.alert('Erro', 'Erro ao cadastrar paciente. Por favor, tente novamente.');
     }
   };
+
 
   let [fontsLoaded] = useFonts({
     LilitaOne_400Regular,
@@ -56,13 +74,13 @@ export default function Index() {
   }
 
   // Função para abrir o modal e selecionar o dente
-  const handleOpenModal = (index:any) => {
+  const handleOpenModal = (index: any) => {
     setSelectedDenteIndex(index);
     setModalVisible(true);
   };
 
   // Função para atualizar a nota de um dente específico
-  const handleSelecionarNotaDente = (nota:any) => {
+  const handleSelecionarNotaDente = (nota: any) => {
     if (selectedDenteIndex !== -1) {
       const novasOpcoesDentes = [...opcoesDentes];
       novasOpcoesDentes[selectedDenteIndex] = {
@@ -112,7 +130,7 @@ export default function Index() {
                 onPress={() => handleOpenModal(index)}
                 style={styles.selectButtonContainer}
               >
-                <CustomText style={styles.text}>{dente.numero}</CustomText>
+                <CustomText style={styles.text}>{dente.dente}</CustomText>
                 <Image
                   source={require("../../../assets/images/Group.png")}
                   style={styles.image}
