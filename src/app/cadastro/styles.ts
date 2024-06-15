@@ -1,5 +1,3 @@
-//CSS DA TELA DE CADASTRO
-
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -65,7 +63,6 @@ export const styles = StyleSheet.create({
     padding: 5,
   },
   inputSubmit: {
-    position:"relative",
     textAlign: 'center',
     justifyContent: "center",
     alignItems: "center",
@@ -80,7 +77,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#6DB1D7",
   },
   buttonText: {
-    position:"relative",
     color: "#fff",
     fontSize: 25,
     textShadowColor: '#334EA0',

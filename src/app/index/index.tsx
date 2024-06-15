@@ -44,7 +44,7 @@ export default function Index() {
             style={styles.input}
             placeholder="Codigo do Paciente"
           />
-          <TouchableOpacity style={styles.searchButton}  onPress={() => router.push('estatisticas')}>
+          <TouchableOpacity style={styles.searchButton}  onPress={() => router.push('dentes')}>
             <Feather
               name="search"
               size={20}

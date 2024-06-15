@@ -1,5 +1,3 @@
-//CSS DA TELA DE ESTATISTICAS
-
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -16,7 +14,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#6DB1D7',
-    borderRadius: 5, // Pequeno botão quadrado
+    borderRadius: 5,
   },
   smallSquareButtonText: {
     color: '#fff',
@@ -67,7 +65,6 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     resizeMode: 'contain',
-
   },
   formContainer: {
     flex: 1,
@@ -162,11 +159,15 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  modalText: {
+    fontSize: 20,
+    marginBottom: 20,
+  },
   backButton: {
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 25, // Forma oval
+    borderRadius: 25,
     backgroundColor: '#334EA0',
     marginTop: 10,
     width: '80%',

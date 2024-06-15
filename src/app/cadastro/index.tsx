@@ -26,7 +26,7 @@ export default function Index() {
   const handleSubmit = async () => {
     if (!nome || !cpf || !idade || !genero) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
-      return;
+      return("index");
     }
     
     try {
@@ -64,9 +64,6 @@ export default function Index() {
       Alert.alert('Erro', 'Erro ao cadastrar paciente. Por favor, tente novamente.');
     }
   };
-  
-  
-  
 
   let [fontsLoaded] = useFonts({
     LilitaOne_400Regular,
@@ -77,6 +74,9 @@ export default function Index() {
   }
 
   const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+
+  // Verifica se todos os campos obrigatórios foram preenchidos
+  const isFormValid = !!id && !!nome && !!cpf && !!idade && !!genero;
 
   return (
     <View style={styles.container}>
@@ -140,9 +140,12 @@ export default function Index() {
 
         </View>
 
-        <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-          <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
-        </TouchableOpacity>
+        {/* Botão de cadastro condicionalmente visível */}
+        {isFormValid && (
+          <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
+            <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
+          </TouchableOpacity>
+        )}
 
         <Modal
           animationType="slide"
@@ -163,7 +166,6 @@ export default function Index() {
                     }
                     setModalVisible(!modalVisible);
                   }}
-                 
                 >
                   <Text >{item.texto}</Text>
                 </TouchableOpacity>
