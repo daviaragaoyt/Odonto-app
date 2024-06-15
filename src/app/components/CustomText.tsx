@@ -15,3 +15,5 @@ const styles = StyleSheet.create({
 });
 
 export default CustomText;
+
+//Transformei a lilitaone em um component e coloquei 2 styles que a usariam.

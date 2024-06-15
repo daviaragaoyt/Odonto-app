@@ -1,3 +1,5 @@
+//CSS DA TELA INICIAL
+
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({

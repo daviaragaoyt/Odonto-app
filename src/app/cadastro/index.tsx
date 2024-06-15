@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert } from 'react-native';
-import { useRouter } from 'expo-router'; // Importar o hook useRouter
+import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import MaskInput from 'react-native-mask-input';
 import CustomText from '../components/CustomText';
@@ -8,7 +8,7 @@ import Body from '../components/Body';
 import { styles } from './styles';
 
 export default function Index() {
-  const router = useRouter(); // Inicializar o hook useRouter
+  const router = useRouter();
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
@@ -23,21 +23,50 @@ export default function Index() {
     { id: 3, texto: 'Voltar' },
   ];
 
-  const handleSubmit = () => {
-    if (!id || !nome || !cpf || !idade || !genero) {
+  const handleSubmit = async () => {
+    if (!nome || !cpf || !idade || !genero) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
-
-    console.log('ID:', id);
-    console.log('Nome:', nome);
-    console.log('CPF:', cpf);
-    console.log('Idade:', idade);
-    console.log('Gênero:', genero);
-
-    // Navegar de volta para a página inicial após o envio bem-sucedido
-    router.replace('/');
+    
+    try {
+      const response = await fetch('http://192.168.1.2:3535/addpaciente', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: nome,
+          cpf: cpf,
+          idade: idade,
+          sexo: genero,
+          cod_paciente: id,
+        }),
+      });
+  
+      if (response.ok) {
+        // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
+        Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
+        setId('');
+        setNome('');
+        setCPF('');
+        setIdade('');
+        setGenero('');
+        router.replace('/');
+      } else {
+        // Se houve um erro na requisição, vamos verificar se a resposta não está vazia antes de tentar analisar como JSON
+        const responseData = await response.text();
+        const errorMessage = responseData || 'Erro ao cadastrar paciente. Por favor, tente novamente.';
+        Alert.alert('Erro', errorMessage);
+      }
+    } catch (error) {
+      console.error('Erro ao cadastrar paciente:', error);
+      Alert.alert('Erro', 'Erro ao cadastrar paciente. Por favor, tente novamente.');
+    }
   };
+  
+  
+  
 
   let [fontsLoaded] = useFonts({
     LilitaOne_400Regular,
@@ -115,7 +144,6 @@ export default function Index() {
           <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
         </TouchableOpacity>
 
-        {/* Modal para seleção de gênero */}
         <Modal
           animationType="slide"
           transparent={true}
