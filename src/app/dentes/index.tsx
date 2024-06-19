@@ -1,4 +1,3 @@
-//Parte do cadastro da arcada dentária de um paciente, de acordo com as notas de cada dente
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -153,10 +152,12 @@ export default function Index() {
       <View style={styles.overlayContent}>
         <View style={styles.formContainer}>
           <View style={styles.inputContainer}> 
-            <CustomText style={styles.text}>NOME: {nome}</CustomText> 
+            <CustomText style={styles.text}>NOME:</CustomText>
+            <CustomText style={styles.input}>{nome}</CustomText>
           </View>
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>CÓDIGO: {codPaciente}</CustomText>
+            <CustomText style={styles.input}>{codPaciente}</CustomText>
           </View>
           <CustomText style={styles.title}>DENTES</CustomText>
 
