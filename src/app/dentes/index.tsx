@@ -150,6 +150,7 @@ export default function Index() {
       setModalVisible(false);
     }
   };
+  
 
   return (
     <View style={styles.container}>
