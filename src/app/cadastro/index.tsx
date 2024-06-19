@@ -34,7 +34,7 @@ export default function Index() {
     }
     
     try {
-      const response = await fetch('http://192.168.0.12:3535/addpaciente', { //Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
+      const response = await fetch('http://192.168.1.5:3535/addpaciente', { //Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
