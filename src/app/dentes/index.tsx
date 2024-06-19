@@ -16,9 +16,9 @@ import { styles } from "./styles";
 
 export default function Index() {
   const router = useRouter();
-  const { nome, codPaciente } = useLocalSearchParams(); //Recebe os parâmetros inseridos no consultar da home
+  const { nome, codPaciente } = useLocalSearchParams(); // Recebe os parâmetros inseridos no consultar da home
 
-  const [opcoesDentes, setOpcoesDentes] = useState([ //Definindo os ids dos dentes e inicializando a nota com 0
+  const [opcoesDentes, setOpcoesDentes] = useState([ // Definindo os ids dos dentes e inicializando a nota com 0
     { id: 1, dente: "V11", nota: 0 },
     { id: 2, dente: "V16", nota: 0 },
     { id: 3, dente: "V26", nota: 0 },
@@ -39,6 +39,7 @@ export default function Index() {
     try {
       await salvarDentes();
       await salvarMedia(); // Salvar a média após calcular
+      navegarParaResultado(); // Navegar para a página de resultado
     } catch (error) {
       console.error('Erro ao processar:', error);
       Alert.alert('Erro', 'Erro ao processar os dados');
@@ -52,12 +53,12 @@ export default function Index() {
     }
 
     try {
-      const response = await fetch('http://192.168.1.5:3535/adddentes', { //Conexão com o BackEnd, adicionando a arcada dentária. *Altere o id de acordo com o da sua máquina
+      const response = await fetch('http://192.168.1.5:3535/adddentes', { // Conexão com o BackEnd, adicionando a arcada dentária. *Altere o id de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ //Passando os dados
+        body: JSON.stringify({ // Passando os dados
           Avaliacao_arcada: opcoesDentes.map(dente => dente.nota).join(','),
           fk_Paciente_Cod_Paciente: codPaciente,
           fk_Dente_Cod_dente: opcoesDentes.map(dente => dente.id).join(','),
@@ -79,14 +80,14 @@ export default function Index() {
 
   const salvarMedia = async () => {
     try {
-      const response = await fetch('http://192.168.1.5:3535/addmedia', { //Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
+      const response = await fetch('http://192.168.1.5:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          //Passando os dados
-          media: mediaNotas.toFixed(2), //toFixed(2) = seleciona apenas 2 números após a vírgula
+          // Passando os dados
+          media: mediaNotas.toFixed(2), // toFixed(2) = seleciona apenas 2 números após a vírgula
           cod_paciente: codPaciente,
         }),
       });
@@ -105,10 +106,20 @@ export default function Index() {
   };
 
   const calcularMedia = () => {
-    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + dente.nota, 0); //Soma as notas
-    const media = totalNotas / opcoesDentes.length; //Divide para chegar na média
+    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + dente.nota, 0); // Soma as notas
+    const media = totalNotas / opcoesDentes.length; // Divide para chegar na média
     setMediaNotas(media);
-    return media
+    return media;
+  };
+
+  const navegarParaResultado = () => {
+    if (mediaNotas >= 0 && mediaNotas <= 1) {
+      router.push('resultados/resultado2');
+    } else if (mediaNotas > 1 && mediaNotas <= 2) {
+      router.push('resultados/resultado1');
+    } else if (mediaNotas > 2 && mediaNotas <= 3) {
+      router.push('resultados/resultado');
+    }
   };
 
   let [fontsLoaded] = useFonts({
@@ -140,7 +151,6 @@ export default function Index() {
     }
   };
 
- 
   return (
     <View style={styles.container}>
       <StatusBar barStyle={"dark-content"} />
