@@ -33,7 +33,7 @@ export default function Index() {
   //Função de buscar o código do paciente
   const handleSearch = async () => {
     try {
-      const response = await fetch(`http://192.168.1.5:3535/pacientes?id=${codigoPaciente}`); //Conexão com o BackEnd para fazer uma busca se existe o código do paciente inserido na home
+      const response = await fetch(`http://192.168.0.12:3535/pacientes?id=${codigoPaciente}`); //Conexão com o BackEnd para fazer uma busca se existe o código do paciente inserido na home
       if (response.ok) {
         const paciente = await response.json();
         console.log(paciente);
