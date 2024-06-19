@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, TouchableOpacity, Image, TouchableOpacityProps, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
-import { styles } from './styles';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import CustomText from '../../components/CustomText';
+import { styles } from './styles';
 
 interface CustomButtonProps extends TouchableOpacityProps {
   text: string;
@@ -22,8 +22,22 @@ export default function Index() {
     LilitaOne_400Regular,
   });
 
+  useEffect(() => {
+    if (fontsLoaded) {
+      const timer = setTimeout(() => {
+        router.back(); // Voltar para a tela principal após 10 segundos
+      }, 10000); // 10000 ms = 10 segundos
+
+      return () => clearTimeout(timer); // Limpar o timeout se o componente desmontar
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <View style={styles.loadingContainer}><CustomText>Carregando...</CustomText></View>;
+    return (
+      <View style={styles.loadingContainer}>
+        <CustomText>Carregando...</CustomText>
+      </View>
+    );
   }
 
   return (

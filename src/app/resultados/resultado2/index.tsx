@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, TouchableOpacity, Image, TouchableOpacityProps, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import { styles } from './styles';
@@ -22,6 +22,16 @@ export default function Index() {
     LilitaOne_400Regular,
   });
 
+  useEffect(() => {
+    if (fontsLoaded) {
+      const timer = setTimeout(() => {
+        router.back(); // Voltar para a tela principal após 10 segundos
+      }, 10000); // 10000 ms = 10 segundos
+
+      return () => clearTimeout(timer); // Limpar o timeout se o componente desmontar
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
     return <View style={styles.loadingContainer}><CustomText>Carregando...</CustomText></View>;
   }
@@ -40,7 +50,7 @@ export default function Index() {
       </View>
       <View style={styles.containerTitle}>
         <CustomText style={styles.text}>
-        Sua saúde bucal precisa melhorar!
+          Sua saúde bucal precisa melhorar!
         </CustomText>
       </View>
       <View style={styles.logoContainer}>
