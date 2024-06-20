@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert, Keyboard } from 'react-native';
+import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import MaskInput from 'react-native-mask-input';
 import CustomText from '../components/CustomText';
 import Body from '../components/Body';
 import { styles } from './styles';
+import { useBackHandler } from '@react-native-community/hooks'; // Importação do useBackHandler
 
 export default function Index() {
   const router = useRouter();
@@ -25,11 +26,13 @@ export default function Index() {
     { id: 3, texto: 'Voltar' },
   ];
 
+
+
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
     if (!nome || !cpf || !idade || !genero) { // Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
-      return("index");
+      return;
     }
     
     try {
@@ -82,40 +85,19 @@ export default function Index() {
   // Verifica se todos os campos obrigatórios foram preenchidos
   const isFormValid = !!id && !!nome && !!cpf && !!idade && !!genero;
 
-  const openModal = () => {
-    Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
-    setModalVisible(true);
-  };
-
+  // Função para fechar o modal
   const closeModal = () => {
     setModalVisible(false);
   };
 
-  const handleBackButton = () => {
-    Alert.alert(
-      'Voltar',
-      'Tem certeza que deseja voltar?',
-      [
-        {
-          text: 'Cancelar',
-          style: 'cancel',
-        },
-        {
-          text: 'Confirmar',
-          onPress: () => router.back(), // Voltar usando o router
-        },
-      ],
-      { cancelable: false }
-    );
-  };
-
+ 
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Body />
-      <TouchableOpacity style={styles.smallSquareButton} onPress={handleBackButton}>
+      <TouchableHighlight style={styles.smallSquareButton} onPress={()=>router.back()}>
         <CustomText style={styles.smallSquareButtonText}>←</CustomText>
-      </TouchableOpacity>
+      </TouchableHighlight>
       <View style={styles.overlayContent}>
         <CustomText style={styles.title}>CADASTRO</CustomText>
         <View style={styles.formContainer}>
@@ -178,6 +160,7 @@ export default function Index() {
           </TouchableOpacity>
         )}
 
+        {/* Modal para seleção de gênero */}
         <Modal
           animationType="slide"
           transparent={true}
@@ -198,7 +181,6 @@ export default function Index() {
                       setGenero(item.texto);
                     }
                     closeModal();
-                    Keyboard.dismiss(); // Fecha o teclado quando o modal é fechado
                   }}
                 >
                   <Text>{item.texto}</Text>

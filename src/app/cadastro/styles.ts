@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    marginTop:50,
+    marginTop:100,
     color: '#fff',
     fontSize: 40,
     textShadowColor: '#000000',
