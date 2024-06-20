@@ -10,7 +10,7 @@ import { styles } from './styles';
 export default function Index() {
   const router = useRouter();
 
-  //Hooks UseState
+  // Hooks UseState
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
   const [cpf, setCPF] = useState('');
@@ -18,27 +18,27 @@ export default function Index() {
   const [genero, setGenero] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
-  //Definindo os gêneros
+  // Definindo os gêneros
   const sexo = [
     { id: 1, texto: 'Feminino' },
     { id: 2, texto: 'Masculino' },
     { id: 3, texto: 'Voltar' },
   ];
 
-  //Função para quando o botão cadastrar for acionado
+  // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
-    if (!nome || !cpf || !idade || !genero) { //Caso os campos estejam vazios
+    if (!nome || !cpf || !idade || !genero) { // Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return("index");
     }
     
     try {
-      const response = await fetch('http://192.168.1.5:3535/addpaciente', { //Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
+      const response = await fetch('http://192.168.1.5:3535/addpaciente', { // Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        //Passando os dados
+        // Passando os dados
         body: JSON.stringify({
           nome: nome,
           cpf: cpf,
@@ -56,7 +56,7 @@ export default function Index() {
         setCPF('');
         setIdade('');
         setGenero('');
-        router.replace('/'); //Volta para a página Home no index
+        router.replace('/'); // Volta para a página Home no index
       } else {
         // Se houve um erro na requisição, vamos verificar se a resposta não está vazia antes de tentar analisar como JSON
         const responseData = await response.text();
@@ -77,7 +77,7 @@ export default function Index() {
     return <View><CustomText>Carregando...</CustomText></View>;
   }
 
-  const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]; //Modelo para o CPF
+  const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]; // Modelo para o CPF
 
   // Verifica se todos os campos obrigatórios foram preenchidos
   const isFormValid = !!id && !!nome && !!cpf && !!idade && !!genero;
@@ -91,14 +91,31 @@ export default function Index() {
     setModalVisible(false);
   };
 
+  const handleBackButton = () => {
+    Alert.alert(
+      'Voltar',
+      'Tem certeza que deseja voltar?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Confirmar',
+          onPress: () => router.back(), // Voltar usando o router
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Body />
-      <TouchableHighlight style={styles.smallSquareButton} onPress={() => router.back()}>
-        
+      <TouchableOpacity style={styles.smallSquareButton} onPress={handleBackButton}>
         <CustomText style={styles.smallSquareButtonText}>←</CustomText>
-      </TouchableHighlight>
+      </TouchableOpacity>
       <View style={styles.overlayContent}>
         <CustomText style={styles.title}>CADASTRO</CustomText>
         <View style={styles.formContainer}>
@@ -161,7 +178,7 @@ export default function Index() {
           </TouchableOpacity>
         )}
 
-<Modal
+        <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
