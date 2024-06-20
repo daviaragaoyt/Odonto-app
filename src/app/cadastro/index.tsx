@@ -1,4 +1,3 @@
-//Index da parte FrontEnd do cadastro
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
@@ -160,7 +159,11 @@ export default function Index() {
             setModalVisible(!modalVisible);
           }}
         >
-          <View style={styles.centeredView}>
+          <TouchableOpacity 
+            style={styles.centeredView} 
+            activeOpacity={1} 
+            onPressOut={() => setModalVisible(false)}
+          >
             <View style={styles.modalView}>
               {sexo.map(item => (
                 <TouchableOpacity
@@ -172,11 +175,11 @@ export default function Index() {
                     setModalVisible(!modalVisible);
                   }}
                 >
-                  <Text >{item.texto}</Text>
+                  <Text>{item.texto}</Text>
                 </TouchableOpacity>
               ))}
             </View>
-          </View>
+          </TouchableOpacity>
         </Modal>
       </View>
     </View>
