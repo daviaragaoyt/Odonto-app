@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert, Platform } from 'react-native';
+=======
+import { View, TextInput, Modal, Text, TouchableOpacity, StatusBar, Alert, Keyboard } from 'react-native';
+>>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import MaskInput from 'react-native-mask-input';
@@ -26,8 +30,11 @@ export default function Index() {
     { id: 3, texto: 'Voltar' },
   ];
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
     if (!nome || !cpf || !idade || !genero) { // Caso os campos estejam vazios
@@ -36,7 +43,11 @@ export default function Index() {
     }
     
     try {
+<<<<<<< HEAD
       const response = await fetch('http://192.168.1.5:3535/addpaciente', { // Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
+=======
+      const response = await fetch('http://192.168.0.12:3535/addpaciente', { // Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
+>>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,12 +96,23 @@ export default function Index() {
   // Verifica se todos os campos obrigatórios foram preenchidos
   const isFormValid = !!id && !!nome && !!cpf && !!idade && !!genero;
 
+<<<<<<< HEAD
   // Função para fechar o modal
+=======
+  const openModal = () => {
+    Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
+    setModalVisible(true);
+  };
+
+>>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
   const closeModal = () => {
     setModalVisible(false);
   };
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
@@ -146,7 +168,7 @@ export default function Index() {
 
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>SEXO:</CustomText>
-            <TouchableOpacity style={styles.input} onPress={() => setModalVisible(true)}>
+            <TouchableOpacity style={styles.input} onPress={openModal}>
               <CustomText style={styles.textSelected}>{genero || 'Selecionar'}</CustomText>
             </TouchableOpacity>
           </View>
@@ -181,6 +203,10 @@ export default function Index() {
                       setGenero(item.texto);
                     }
                     closeModal();
+<<<<<<< HEAD
+=======
+                    Keyboard.dismiss(); // Fecha o teclado quando o modal é fechado
+>>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
                   }}
                 >
                   <Text>{item.texto}</Text>
