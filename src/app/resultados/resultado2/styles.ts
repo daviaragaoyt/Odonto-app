@@ -42,8 +42,8 @@ export const styles = StyleSheet.create({
     marginVertical: 20,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: '150%',
+    height: '150%',
     resizeMode: 'contain',
   },
   inputSubmit: {
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
     marginTop: 30,
   },
   logo: {
-    width: 200,
+    width:200,
     resizeMode: 'contain',
   },
 });

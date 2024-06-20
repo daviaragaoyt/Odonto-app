@@ -16,9 +16,9 @@ import { styles } from "./styles";
 
 export default function Index() {
   const router = useRouter();
-  const { nome, codPaciente } = useLocalSearchParams(); // Recebe os parâmetros inseridos no consultar da home
+  const { nome, codPaciente } = useLocalSearchParams();
 
-  const [opcoesDentes, setOpcoesDentes] = useState([ // Definindo os ids dos dentes e inicializando a nota com 0
+  const [opcoesDentes, setOpcoesDentes] = useState([
     { id: 1, dente: "V11", nota: 0 },
     { id: 2, dente: "V16", nota: 0 },
     { id: 3, dente: "V26", nota: 0 },
@@ -32,14 +32,14 @@ export default function Index() {
   const [mediaNotas, setMediaNotas] = useState(0);
 
   useEffect(() => {
-    calcularMedia(); // Calcular a média sempre que as notas mudarem
+    calcularMedia();
   }, [opcoesDentes]);
 
   const handleSubmit = async () => {
     try {
       await salvarDentes();
-      await salvarMedia(); // Salvar a média após calcular
-      navegarParaResultado(); // Navegar para a página de resultado
+      await salvarMedia();
+      navegarParaResultado();
     } catch (error) {
       console.error('Erro ao processar:', error);
       Alert.alert('Erro', 'Erro ao processar os dados');
@@ -58,7 +58,7 @@ export default function Index() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ // Passando os dados
+        body: JSON.stringify({
           Avaliacao_arcada: opcoesDentes.map(dente => dente.nota).join(','),
           fk_Paciente_Cod_Paciente: codPaciente,
           fk_Dente_Cod_dente: opcoesDentes.map(dente => dente.id).join(','),
@@ -86,8 +86,7 @@ export default function Index() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          // Passando os dados
-          media: mediaNotas.toFixed(2), // toFixed(2) = seleciona apenas 2 números após a vírgula
+          media: mediaNotas.toFixed(2),
           cod_paciente: codPaciente,
         }),
       });
@@ -106,8 +105,8 @@ export default function Index() {
   };
 
   const calcularMedia = () => {
-    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + dente.nota, 0); // Soma as notas
-    const media = totalNotas / opcoesDentes.length; // Divide para chegar na média
+    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + dente.nota, 0);
+    const media = totalNotas / opcoesDentes.length;
     setMediaNotas(media);
     return media;
   };
@@ -150,7 +149,6 @@ export default function Index() {
       setModalVisible(false);
     }
   };
-  
 
   return (
     <View style={styles.container}>
@@ -164,12 +162,12 @@ export default function Index() {
       </TouchableOpacity>
       <View style={styles.overlayContent}>
         <View style={styles.formContainer}>
-          <View style={styles.inputContainer}> 
+          <View style={styles.inputContainer}>
             <CustomText style={styles.text}>NOME:</CustomText>
             <CustomText style={styles.input}>{nome}</CustomText>
           </View>
           <View style={styles.inputContainer}>
-            <CustomText style={styles.text}>CÓDIGO: {codPaciente}</CustomText>
+            <CustomText style={styles.text}>CÓDIGO:</CustomText>
             <CustomText style={styles.input}>{codPaciente}</CustomText>
           </View>
           <CustomText style={styles.title}>DENTES</CustomText>
@@ -194,24 +192,28 @@ export default function Index() {
           </View>
 
           <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                {[0, 1, 2, 3].map((nota) => (
-                  <TouchableOpacity
-                    key={nota}
-                    onPress={() => handleSelecionarNotaDente(nota)}
-                  >
-                    <Text style={styles.modalText}>{`Nota ${nota}`}</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            </View>
-          </Modal>
+  animationType="slide"
+  transparent={true}
+  visible={modalVisible}
+  onRequestClose={() => setModalVisible(false)}
+>
+  <TouchableOpacity
+    style={styles.centeredView}
+    activeOpacity={1}
+    onPressOut={() => setModalVisible(false)}
+  >
+    <View style={styles.modalView}>
+      {[0, 1, 2, 3].map((nota) => (
+        <TouchableOpacity
+          key={nota}
+          onPress={() => handleSelecionarNotaDente(nota)}
+        >
+          <Text style={styles.modalText}>{`Nota ${nota}`}</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  </TouchableOpacity>
+</Modal>
 
           {opcoesDentes.every(dente => dente.nota !== null) && (
             <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>

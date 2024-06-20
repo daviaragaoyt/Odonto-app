@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Modal, Text, TouchableOpacity, StatusBar, Alert } from 'react-native';
+import { View, TextInput, Modal, Text, TouchableOpacity, StatusBar, Alert, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import MaskInput from 'react-native-mask-input';
@@ -82,6 +82,15 @@ export default function Index() {
   // Verifica se todos os campos obrigatórios foram preenchidos
   const isFormValid = !!id && !!nome && !!cpf && !!idade && !!genero;
 
+  const openModal = () => {
+    Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
@@ -137,7 +146,7 @@ export default function Index() {
 
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>SEXO:</CustomText>
-            <TouchableOpacity style={styles.input} onPress={() => setModalVisible(true)}>
+            <TouchableOpacity style={styles.input} onPress={openModal}>
               <CustomText style={styles.textSelected}>{genero || 'Selecionar'}</CustomText>
             </TouchableOpacity>
           </View>
@@ -155,11 +164,13 @@ export default function Index() {
           animationType="slide"
           transparent={true}
           visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}
+          onRequestClose={closeModal}
         >
-          <View style={styles.centeredView}>
+          <TouchableOpacity 
+            style={styles.centeredView} 
+            activeOpacity={1} 
+            onPressOut={closeModal}
+          >
             <View style={styles.modalView}>
               {sexo.map(item => (
                 <TouchableOpacity
@@ -168,14 +179,15 @@ export default function Index() {
                     if(item.texto !== 'Voltar') {
                       setGenero(item.texto);
                     }
-                    setModalVisible(!modalVisible);
+                    closeModal();
+                    Keyboard.dismiss(); // Fecha o teclado quando o modal é fechado
                   }}
                 >
                   <Text>{item.texto}</Text>
                 </TouchableOpacity>
               ))}
             </View>
-          </View>
+          </TouchableOpacity>
         </Modal>
       </View>
     </View>
