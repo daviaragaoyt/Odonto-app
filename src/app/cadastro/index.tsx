@@ -29,9 +29,9 @@ export default function Index() {
   const handleSubmit = async () => {
     if (!nome || !cpf || !idade || !genero) { //Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
-      return("index");
+      return ("index");
     }
-    
+
     try {
       const response = await fetch('http://192.168.1.5:3535/addpaciente', { //Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
         method: 'POST',
@@ -47,7 +47,7 @@ export default function Index() {
           cod_paciente: id,
         }),
       });
-  
+
       if (response.ok) {
         // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
         Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
@@ -128,9 +128,12 @@ export default function Index() {
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>IDADE:</CustomText>
             <TextInput
-              keyboardType='numeric'  
               style={styles.input}
-              onChangeText={setIdade}
+              onChangeText={(text) => {
+                // Utilizando expressão regular para permitir apenas números
+                const numericValue = text.replace(/[^0-9]/g, ''); // Remove tudo que não for número
+                setIdade(numericValue); // Atualiza o estado apenas com números
+              }}
               value={idade}
             />
           </View>
@@ -159,9 +162,9 @@ export default function Index() {
             setModalVisible(!modalVisible);
           }}
         >
-          <TouchableOpacity 
-            style={styles.centeredView} 
-            activeOpacity={1} 
+          <TouchableOpacity
+            style={styles.centeredView}
+            activeOpacity={1}
             onPressOut={() => setModalVisible(false)}
           >
             <View style={styles.modalView}>
@@ -169,7 +172,7 @@ export default function Index() {
                 <TouchableOpacity
                   key={item.id}
                   onPress={() => {
-                    if(item.texto !== 'Voltar') {
+                    if (item.texto !== 'Voltar') {
                       setGenero(item.texto);
                     }
                     setModalVisible(!modalVisible);
