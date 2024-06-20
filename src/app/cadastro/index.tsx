@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert } from 'react-native';
+import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import MaskInput from 'react-native-mask-input';
@@ -29,9 +29,9 @@ export default function Index() {
   const handleSubmit = async () => {
     if (!nome || !cpf || !idade || !genero) { //Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
-      return ("index");
+      return("index");
     }
-
+    
     try {
       const response = await fetch('http://192.168.1.5:3535/addpaciente', { //Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
         method: 'POST',
@@ -47,7 +47,7 @@ export default function Index() {
           cod_paciente: id,
         }),
       });
-
+  
       if (response.ok) {
         // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
         Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
@@ -82,13 +82,23 @@ export default function Index() {
   // Verifica se todos os campos obrigatórios foram preenchidos
   const isFormValid = !!id && !!nome && !!cpf && !!idade && !!genero;
 
+  const openModal = () => {
+    Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Body />
-      <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()}>
+      <TouchableHighlight style={styles.smallSquareButton} onPress={() => router.back()}>
+        
         <CustomText style={styles.smallSquareButtonText}>←</CustomText>
-      </TouchableOpacity>
+      </TouchableHighlight>
       <View style={styles.overlayContent}>
         <CustomText style={styles.title}>CADASTRO</CustomText>
         <View style={styles.formContainer}>
@@ -128,12 +138,9 @@ export default function Index() {
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>IDADE:</CustomText>
             <TextInput
+              keyboardType='numeric'  
               style={styles.input}
-              onChangeText={(text) => {
-                // Utilizando expressão regular para permitir apenas números
-                const numericValue = text.replace(/[^0-9]/g, ''); // Remove tudo que não for número
-                setIdade(numericValue); // Atualiza o estado apenas com números
-              }}
+              onChangeText={setIdade}
               value={idade}
             />
           </View>
@@ -154,28 +161,27 @@ export default function Index() {
           </TouchableOpacity>
         )}
 
-        <Modal
+<Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}
+          onRequestClose={closeModal}
         >
-          <TouchableOpacity
-            style={styles.centeredView}
-            activeOpacity={1}
-            onPressOut={() => setModalVisible(false)}
+          <TouchableOpacity 
+            style={styles.centeredView} 
+            activeOpacity={1} 
+            onPressOut={closeModal}
           >
             <View style={styles.modalView}>
               {sexo.map(item => (
                 <TouchableOpacity
                   key={item.id}
                   onPress={() => {
-                    if (item.texto !== 'Voltar') {
+                    if(item.texto !== 'Voltar') {
                       setGenero(item.texto);
                     }
-                    setModalVisible(!modalVisible);
+                    closeModal();
+                    Keyboard.dismiss(); // Fecha o teclado quando o modal é fechado
                   }}
                 >
                   <Text>{item.texto}</Text>
