@@ -8,3 +8,5 @@
 Obs: no terminal irá aparecer um aviso relacionado a fonte, não precisa se preocupar com isso
 
 Lembrando que para fucionar com o backend, é necessário que os dois estejam rodando com seus devidos comandos.
+
+Para atualizar o projeto em sua máquina, caso tenha feito o clone, basta dar um git pull, e receber todas as mudanças. Caso esteja usando o download em zip, você deverá fazer o download novamente.
