@@ -41,7 +41,7 @@ export default function Index() {
       await salvarMedia();
       navegarParaResultado();
     } catch (error) {
-      console.error('Erro ao processar:', error);
+      console.error('Erro ao processar: ', error);
       Alert.alert('Erro', 'Erro ao processar os dados');
     }
   };
