@@ -1,38 +1,34 @@
 import React, { useEffect } from 'react';
-import { View, TouchableOpacity, Image, TouchableOpacityProps, StatusBar } from 'react-native';
+import { View, TouchableOpacity, Image, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import { styles } from './styles';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import CustomText from '../../components/CustomText';
 
-interface CustomButtonProps extends TouchableOpacityProps {
-  text: string;
-}
-
-const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
-  <TouchableOpacity {...props} style={styles.inputSubmit}>
-    <CustomText style={styles.buttonText}>{text}</CustomText>
-  </TouchableOpacity>
-);
-
 export default function Index() {
   const router = useRouter();
 
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     LilitaOne_400Regular,
   });
 
-  if (!fontsLoaded) {
-    return <View style={styles.loadingContainer}><CustomText>Carregando...</CustomText></View>;
-  }
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      router.back(); // Voltar para a tela principal após 10 segundos
-    }, 10000); // 10000 ms = 10 segundos
+    if (fontsLoaded) {
+      const timer = setTimeout(() => {
+        router.back(); // Voltar para a tela principal após 10 segundos
+      }, 10000); // 10000 ms = 10 segundos
 
-    return () => clearTimeout(timer); // Limpar o timeout se o componente desmontar
-  }, []);
+      return () => clearTimeout(timer); // Limpar o timeout se o componente desmontar
+    }
+  }, [fontsLoaded, router]);
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.loadingContainer}>
+        <CustomText>Carregando...</CustomText>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>

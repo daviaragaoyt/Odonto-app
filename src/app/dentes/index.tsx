@@ -19,12 +19,12 @@ export default function Index() {
   const { nome, codPaciente } = useLocalSearchParams();
 
   const [opcoesDentes, setOpcoesDentes] = useState([
-    { id: 1, dente: "V11", nota: 0 },
-    { id: 2, dente: "V16", nota: 0 },
-    { id: 3, dente: "V26", nota: 0 },
-    { id: 4, dente: "V31", nota: 0 },
-    { id: 5, dente: "L36", nota: 0 },
-    { id: 6, dente: "L46", nota: 0 },
+    { id: 1, dente: "V11", nota: null },
+    { id: 2, dente: "V16", nota: null },
+    { id: 3, dente: "V26", nota: null },
+    { id: 4, dente: "V31", nota: null },
+    { id: 5, dente: "L36", nota: null },
+    { id: 6, dente: "L46", nota: null },
   ]);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -38,10 +38,10 @@ export default function Index() {
   const handleSubmit = async () => {
     try {
       await salvarDentes();
-      await salvarMedia();
+      //await salvarMedia();
       navegarParaResultado();
     } catch (error) {
-      console.error('Erro ao processar:', error);
+      console.error('Erro ao processar: ', error);
       Alert.alert('Erro', 'Erro ao processar os dados');
     }
   };
@@ -53,7 +53,7 @@ export default function Index() {
     }
 
     try {
-      const response = await fetch('http://192.168.0.12:3535/adddentes', { // Conexão com o BackEnd, adicionando a arcada dentária. *Altere o id de acordo com o da sua máquina
+      const response = await fetch('http:192.168.1.5//:3535/adddentes', { // Conexão com o BackEnd, adicionando a arcada dentária. *Altere o id de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,6 +66,7 @@ export default function Index() {
       });
 
       if (response.ok) {
+        salvarMedia(); //Se salvar os dentes, é possível salvar a média também, evitando repetição de código
         Alert.alert('Sucesso', 'Dados dos dentes salvos com sucesso!');
       } else {
         Alert.alert('Erro', 'Erro ao salvar os dados dos dentes.');
@@ -79,8 +80,9 @@ export default function Index() {
   };
 
   const salvarMedia = async () => {
+    //Verificação de campos nulos, deletada, já que há a verificação na função de salvarDentes
     try {
-      const response = await fetch('http://192.168.0.12:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
+      const response = await fetch('http://192.168.1.5:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,8 +107,8 @@ export default function Index() {
   };
 
   const calcularMedia = () => {
-    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + dente.nota, 0);
-    const media = totalNotas / opcoesDentes.length;
+    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + (dente.nota !== null ? dente.nota : 0), 0);
+    const media = totalNotas / opcoesDentes.filter(dente => dente.nota !== null).length;
     setMediaNotas(media);
     return media;
   };
@@ -133,12 +135,12 @@ export default function Index() {
     );
   }
 
-  const handleOpenModal = (index:any) => {
+  const handleOpenModal = (index: any) => {
     setSelectedDenteIndex(index);
     setModalVisible(true);
   };
 
-  const handleSelecionarNotaDente = (nota:any) => {
+  const handleSelecionarNotaDente = (nota: any) => {
     if (selectedDenteIndex !== -1) {
       const novasOpcoesDentes = [...opcoesDentes];
       novasOpcoesDentes[selectedDenteIndex] = {
@@ -154,13 +156,10 @@ export default function Index() {
     <View style={styles.container}>
       <StatusBar barStyle={"dark-content"} />
       <Body />
-      <TouchableOpacity
-        style={styles.smallSquareButton}
-        onPress={() => router.back()}
-      >
-        <CustomText style={styles.smallSquareButtonText}>←</CustomText>
-      </TouchableOpacity>
       <View style={styles.overlayContent}>
+        <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()} >
+          <CustomText style={styles.smallSquareButtonText}>←</CustomText>
+        </TouchableOpacity>
         <View style={styles.formContainer}>
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>NOME:</CustomText>
@@ -192,34 +191,33 @@ export default function Index() {
           </View>
 
           <Modal
-  animationType="slide"
-  transparent={true}
-  visible={modalVisible}
-  onRequestClose={() => setModalVisible(false)}
->
-  <TouchableOpacity
-    style={styles.centeredView}
-    activeOpacity={1}
-    onPressOut={() => setModalVisible(false)}
-  >
-    <View style={styles.modalView}>
-      {[0, 1, 2, 3].map((nota) => (
-        <TouchableOpacity
-          key={nota}
-          onPress={() => handleSelecionarNotaDente(nota)}
-        >
-          <Text style={styles.modalText}>{`Nota ${nota}`}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  </TouchableOpacity>
-</Modal>
-
-          {opcoesDentes.every(dente => dente.nota !== null) && (
-            <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-              <CustomText style={styles.buttonText}>RESULTADO</CustomText>
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <TouchableOpacity
+              style={styles.centeredView}
+              activeOpacity={1}
+              onPressOut={() => setModalVisible(false)}
+            >
+              <View style={styles.modalView}>
+                {[0, 1, 2, 3].map((nota) => (
+                  <TouchableOpacity
+                    key={nota}
+                    onPress={() => handleSelecionarNotaDente(nota)}
+                  >
+                    <Text style={styles.modalText}>{`Nota ${nota}`}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
             </TouchableOpacity>
-          )}
+          </Modal>
+
+          <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
+            <CustomText style={styles.buttonText}>RESULTADO</CustomText>
+          </TouchableOpacity>
+
         </View>
       </View>
     </View>

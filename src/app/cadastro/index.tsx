@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert, Platform } from 'react-native';
-=======
-import { View, TextInput, Modal, Text, TouchableOpacity, StatusBar, Alert, Keyboard } from 'react-native';
->>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
+import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import MaskInput from 'react-native-mask-input';
 import CustomText from '../components/CustomText';
 import Body from '../components/Body';
 import { styles } from './styles';
-import { useBackHandler } from '@react-native-community/hooks'; // Importação do useBackHandler
+
 
 export default function Index() {
   const router = useRouter();
 
   // Hooks UseState
-  const [id, setId] = useState('');
   const [nome, setNome] = useState('');
+  const [sobrenome, setSobrenome] = useState('');
   const [cpf, setCPF] = useState('');
   const [idade, setIdade] = useState('');
   const [genero, setGenero] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+
 
   // Definindo os gêneros
   const sexo = [
@@ -30,24 +27,17 @@ export default function Index() {
     { id: 3, texto: 'Voltar' },
   ];
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
     if (!nome || !cpf || !idade || !genero) { // Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
-    
+
     try {
-<<<<<<< HEAD
       const response = await fetch('http://192.168.1.5:3535/addpaciente', { // Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
-=======
-      const response = await fetch('http://192.168.0.12:3535/addpaciente', { // Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
->>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,18 +45,19 @@ export default function Index() {
         // Passando os dados
         body: JSON.stringify({
           nome: nome,
+          sobrenome: sobrenome,
           cpf: cpf,
           idade: idade,
           sexo: genero,
-          cod_paciente: id,
+
         }),
       });
-  
+
       if (response.ok) {
         // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
         Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
-        setId('');
         setNome('');
+        setSobrenome('');
         setCPF('');
         setIdade('');
         setGenero('');
@@ -93,52 +84,45 @@ export default function Index() {
 
   const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]; // Modelo para o CPF
 
-  // Verifica se todos os campos obrigatórios foram preenchidos
-  const isFormValid = !!id && !!nome && !!cpf && !!idade && !!genero;
 
-<<<<<<< HEAD
-  // Função para fechar o modal
-=======
+
   const openModal = () => {
     Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
     setModalVisible(true);
   };
 
->>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
   const closeModal = () => {
     setModalVisible(false);
   };
 
-<<<<<<< HEAD
- 
-=======
->>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Body />
-      <TouchableHighlight style={styles.smallSquareButton} onPress={()=>router.back()}>
+      <TouchableHighlight style={styles.smallSquareButton} onPress={() => router.back()}>
         <CustomText style={styles.smallSquareButtonText}>←</CustomText>
       </TouchableHighlight>
       <View style={styles.overlayContent}>
+        <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()}>
+          <CustomText style={styles.smallSquareButtonText}>←</CustomText>
+        </TouchableOpacity>
         <CustomText style={styles.title}>CADASTRO</CustomText>
         <View style={styles.formContainer}>
-          <View style={styles.inputContainer}>
-            <CustomText style={styles.text}>CÓDIGO:</CustomText>
-            <TextInput
-              keyboardType='numeric'
-              style={styles.input}
-              onChangeText={setId}
-              value={id}
-            />
-          </View>
-
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>NOME:</CustomText>
             <TextInput
               style={styles.input}
               onChangeText={setNome}
               value={nome}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <CustomText style={styles.sobrenome}>SOBRENOME:</CustomText>
+            <TextInput
+              style={styles.input}
+              onChangeText={setSobrenome}
+              value={sobrenome}
             />
           </View>
 
@@ -159,7 +143,7 @@ export default function Index() {
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>IDADE:</CustomText>
             <TextInput
-              keyboardType='numeric'  
+              keyboardType='numeric'
               style={styles.input}
               onChangeText={setIdade}
               value={idade}
@@ -173,14 +157,10 @@ export default function Index() {
             </TouchableOpacity>
           </View>
 
-        </View>
-
-        {/* Botão de cadastro condicionalmente visível */}
-        {isFormValid && (
           <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
             <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
           </TouchableOpacity>
-        )}
+        </View>
 
         {/* Modal para seleção de gênero */}
         <Modal
@@ -189,9 +169,9 @@ export default function Index() {
           visible={modalVisible}
           onRequestClose={closeModal}
         >
-          <TouchableOpacity 
-            style={styles.centeredView} 
-            activeOpacity={1} 
+          <TouchableOpacity
+            style={styles.centeredView}
+            activeOpacity={1}
             onPressOut={closeModal}
           >
             <View style={styles.modalView}>
@@ -199,14 +179,10 @@ export default function Index() {
                 <TouchableOpacity
                   key={item.id}
                   onPress={() => {
-                    if(item.texto !== 'Voltar') {
+                    if (item.texto !== 'Voltar') {
                       setGenero(item.texto);
                     }
                     closeModal();
-<<<<<<< HEAD
-=======
-                    Keyboard.dismiss(); // Fecha o teclado quando o modal é fechado
->>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
                   }}
                 >
                   <Text>{item.texto}</Text>

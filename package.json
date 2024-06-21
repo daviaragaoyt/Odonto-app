@@ -18,10 +18,7 @@
     "@react-native-community/hooks": "^3.0.0",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
-<<<<<<< HEAD
     "@shopify/react-native-skia": "^1.3.6",
-=======
->>>>>>> c1301d149cd7bcbce72e3130da315a05ee6ca69a
     "expo": "^51.0.14",
     "expo-font": "~12.0.6",
     "expo-linking": "~6.3.1",

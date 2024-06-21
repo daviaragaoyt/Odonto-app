@@ -27,6 +27,14 @@ export const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 1,
   },
+  sobrenome:{
+    color: '#fff',
+    fontSize: 20,
+    marginRight: 10,
+    textShadowColor: '#000000BF',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
+  },
   textSelected:{
     color:'#000',
     textShadowColor: '#fff',
@@ -69,10 +77,10 @@ export const styles = StyleSheet.create({
     height: 70,
     width: 300,
     padding: 15,
+    marginTop:100,
     borderRadius: 10,
     borderColor: '#334EA0',
     borderWidth: 1,
-    marginBottom: 100,
     paddingHorizontal: 5,
     backgroundColor: "#6DB1D7",
   },
@@ -89,6 +97,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
+
+  
   modalView: {
     margin: 20,
     backgroundColor: "white",
