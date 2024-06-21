@@ -12,8 +12,7 @@ export default function Index() {
   const router = useRouter();
 
   // Hooks UseState
-  const [nome, setNome] = useState('');
-  const [sobrenome, setSobrenome] = useState('');
+  const [nome,setNome]=useState('');
   const [cpf, setCPF] = useState('');
   const [idade, setIdade] = useState('');
   const [genero, setGenero] = useState('');
@@ -31,7 +30,7 @@ export default function Index() {
 
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
-    if (!nome || !sobrenome || !cpf || !idade || !genero) { // Caso os campos estejam vazios
+    if (!nome  || !cpf || !idade || !genero) { // Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
@@ -45,7 +44,7 @@ export default function Index() {
         // Passando os dados
         body: JSON.stringify({
           nome: nome,
-          sobrenome: sobrenome,
+         
           cpf: cpf,
           idade: idade,
           sexo: genero,
@@ -57,7 +56,7 @@ export default function Index() {
         // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
         Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
         setNome('');
-        setSobrenome('');
+     
         setCPF('');
         setIdade('');
         setGenero('');
@@ -114,15 +113,6 @@ export default function Index() {
               style={styles.input}
               onChangeText={setNome}
               value={nome}
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <CustomText style={styles.sobrenome}>SOBRENOME:</CustomText>
-            <TextInput
-              style={styles.input}
-              onChangeText={setSobrenome}
-              value={sobrenome}
             />
           </View>
 

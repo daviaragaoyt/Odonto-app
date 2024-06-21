@@ -69,7 +69,7 @@ export default function Index() {
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Nome do Paciente"
+            placeholder="Nome Completo do Paciente"
             value={codigoPaciente}
             onChangeText={setCodigoPaciente}
           />
