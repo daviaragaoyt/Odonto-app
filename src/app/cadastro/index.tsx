@@ -95,10 +95,10 @@ export default function Index() {
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Body />
-      <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()}>
-        <CustomText style={styles.smallSquareButtonText}>←</CustomText>
-      </TouchableOpacity>
       <View style={styles.overlayContent}>
+        <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()}>
+          <CustomText style={styles.smallSquareButtonText}>←</CustomText>
+        </TouchableOpacity>
         <CustomText style={styles.title}>CADASTRO</CustomText>
         <View style={styles.formContainer}>
           <View style={styles.inputContainer}>
