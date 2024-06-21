@@ -19,12 +19,12 @@ export default function Index() {
   const { nome, codPaciente } = useLocalSearchParams();
 
   const [opcoesDentes, setOpcoesDentes] = useState([
-    { id: 1, dente: "V11", nota: 0 },
-    { id: 2, dente: "V16", nota: 0 },
-    { id: 3, dente: "V26", nota: 0 },
-    { id: 4, dente: "V31", nota: 0 },
-    { id: 5, dente: "L36", nota: 0 },
-    { id: 6, dente: "L46", nota: 0 },
+    { id: 1, dente: "V11", nota: null },
+    { id: 2, dente: "V16", nota: null },
+    { id: 3, dente: "V26", nota: null },
+    { id: 4, dente: "V31", nota: null },
+    { id: 5, dente: "L36", nota: null },
+    { id: 6, dente: "L46", nota: null },
   ]);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -38,7 +38,7 @@ export default function Index() {
   const handleSubmit = async () => {
     try {
       await salvarDentes();
-      await salvarMedia();
+      //await salvarMedia();
       navegarParaResultado();
     } catch (error) {
       console.error('Erro ao processar: ', error);
@@ -66,6 +66,7 @@ export default function Index() {
       });
 
       if (response.ok) {
+        salvarMedia(); //Se salvar os dentes, é possível salvar a média também, evitando repetição de código
         Alert.alert('Sucesso', 'Dados dos dentes salvos com sucesso!');
       } else {
         Alert.alert('Erro', 'Erro ao salvar os dados dos dentes.');
@@ -79,34 +80,35 @@ export default function Index() {
   };
 
   const salvarMedia = async () => {
-    try {
-      const response = await fetch('http://192.168.0.12:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          media: mediaNotas.toFixed(2),
-          cod_paciente: codPaciente,
-        }),
-      });
-
-      if (response.ok) {
-        Alert.alert('Sucesso', 'Média das notas salva com sucesso!');
-      } else {
-        Alert.alert('Erro', 'Erro ao salvar a média das notas.');
-        throw new Error('Erro ao salvar a média das notas');
+      //Verificação de campos nulos, deletada, já que há a verificação na função de salvarDentes
+      try {
+        const response = await fetch('http://192.168.0.12:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            media: mediaNotas.toFixed(2),
+            cod_paciente: codPaciente,
+          }),
+        });
+  
+        if (response.ok) {
+          Alert.alert('Sucesso', 'Média das notas salva com sucesso!');
+        } else {
+          Alert.alert('Erro', 'Erro ao salvar a média das notas.');
+          throw new Error('Erro ao salvar a média das notas');
+        }
+      } catch (error) {
+        console.error('Erro ao salvar a média das notas:', error);
+        Alert.alert('Erro', 'Erro ao salvar a média das notas');
+        throw error;
       }
-    } catch (error) {
-      console.error('Erro ao salvar a média das notas:', error);
-      Alert.alert('Erro', 'Erro ao salvar a média das notas');
-      throw error;
-    }
   };
 
   const calcularMedia = () => {
-    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + dente.nota, 0);
-    const media = totalNotas / opcoesDentes.length;
+    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + (dente.nota !== null ? dente.nota : 0), 0);
+    const media = totalNotas / opcoesDentes.filter(dente => dente.nota !== null).length;
     setMediaNotas(media);
     return media;
   };
@@ -215,11 +217,11 @@ export default function Index() {
   </TouchableOpacity>
 </Modal>
 
-          {opcoesDentes.every(dente => dente.nota !== null) && (
+          
             <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
               <CustomText style={styles.buttonText}>RESULTADO</CustomText>
             </TouchableOpacity>
-          )}
+          
         </View>
       </View>
     </View>
