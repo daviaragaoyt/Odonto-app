@@ -80,30 +80,30 @@ export default function Index() {
   };
 
   const salvarMedia = async () => {
-      //Verificação de campos nulos, deletada, já que há a verificação na função de salvarDentes
-      try {
-        const response = await fetch('http://192.168.0.12:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            media: mediaNotas.toFixed(2),
-            cod_paciente: codPaciente,
-          }),
-        });
-  
-        if (response.ok) {
-          Alert.alert('Sucesso', 'Média das notas salva com sucesso!');
-        } else {
-          Alert.alert('Erro', 'Erro ao salvar a média das notas.');
-          throw new Error('Erro ao salvar a média das notas');
-        }
-      } catch (error) {
-        console.error('Erro ao salvar a média das notas:', error);
-        Alert.alert('Erro', 'Erro ao salvar a média das notas');
-        throw error;
+    //Verificação de campos nulos, deletada, já que há a verificação na função de salvarDentes
+    try {
+      const response = await fetch('http://192.168.0.12:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          media: mediaNotas.toFixed(2),
+          cod_paciente: codPaciente,
+        }),
+      });
+
+      if (response.ok) {
+        Alert.alert('Sucesso', 'Média das notas salva com sucesso!');
+      } else {
+        Alert.alert('Erro', 'Erro ao salvar a média das notas.');
+        throw new Error('Erro ao salvar a média das notas');
       }
+    } catch (error) {
+      console.error('Erro ao salvar a média das notas:', error);
+      Alert.alert('Erro', 'Erro ao salvar a média das notas');
+      throw error;
+    }
   };
 
   const calcularMedia = () => {
@@ -135,12 +135,12 @@ export default function Index() {
     );
   }
 
-  const handleOpenModal = (index:any) => {
+  const handleOpenModal = (index: any) => {
     setSelectedDenteIndex(index);
     setModalVisible(true);
   };
 
-  const handleSelecionarNotaDente = (nota:any) => {
+  const handleSelecionarNotaDente = (nota: any) => {
     if (selectedDenteIndex !== -1) {
       const novasOpcoesDentes = [...opcoesDentes];
       novasOpcoesDentes[selectedDenteIndex] = {
@@ -191,34 +191,33 @@ export default function Index() {
           </View>
 
           <Modal
-  animationType="slide"
-  transparent={true}
-  visible={modalVisible}
-  onRequestClose={() => setModalVisible(false)}
->
-  <TouchableOpacity
-    style={styles.centeredView}
-    activeOpacity={1}
-    onPressOut={() => setModalVisible(false)}
-  >
-    <View style={styles.modalView}>
-      {[0, 1, 2, 3].map((nota) => (
-        <TouchableOpacity
-          key={nota}
-          onPress={() => handleSelecionarNotaDente(nota)}
-        >
-          <Text style={styles.modalText}>{`Nota ${nota}`}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  </TouchableOpacity>
-</Modal>
-
-          
-            <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-              <CustomText style={styles.buttonText}>RESULTADO</CustomText>
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <TouchableOpacity
+              style={styles.centeredView}
+              activeOpacity={1}
+              onPressOut={() => setModalVisible(false)}
+            >
+              <View style={styles.modalView}>
+                {[0, 1, 2, 3].map((nota) => (
+                  <TouchableOpacity
+                    key={nota}
+                    onPress={() => handleSelecionarNotaDente(nota)}
+                  >
+                    <Text style={styles.modalText}>{`Nota ${nota}`}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
             </TouchableOpacity>
-          
+          </Modal>
+
+          <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
+            <CustomText style={styles.buttonText}>RESULTADO</CustomText>
+          </TouchableOpacity>
+
         </View>
       </View>
     </View>

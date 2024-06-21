@@ -154,12 +154,11 @@ export default function Index() {
         </View>
 
         {/* Botão de cadastro condicionalmente visível */}
-        {isFormValid && (
-          <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-            <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
-          </TouchableOpacity>
-        )}
-
+        
+        <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
+          <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
+        </TouchableOpacity>
+        
         <Modal
           animationType="slide"
           transparent={true}
