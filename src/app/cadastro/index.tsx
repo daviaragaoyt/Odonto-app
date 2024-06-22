@@ -58,7 +58,7 @@ export default function Index() {
         // Se houve um erro na requisição, vamos verificar se a resposta não está vazia antes de tentar analisar como JSON
         const responseData = await response.text();
         const errorMessage = responseData || 'Erro ao cadastrar paciente. Por favor, tente novamente.';
-        Alert.alert('Erro', errorMessage);
+        Alert.alert('Erro', 'Esse nome já existe em nosso sistema.');
       }
     } catch (error) {
       console.error('Erro ao cadastrar paciente:', error);
