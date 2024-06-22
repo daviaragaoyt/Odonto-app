@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   smallSquareButton: {
     position: 'absolute',
-    top: 40,
+    top: 80,
     left: 20,
     width: 40,
     height: 40,
@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
   },
-  
   containerTitle: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -48,20 +47,22 @@ export const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 2,
   },
-
   denteContainer: {
     flex: 1,
+    textAlign:'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     alignItems: 'center',
+    width:'100%',
     marginVertical: 20,
   },
   selectButtonContainer: {
+
     marginTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
-    width: '40%',
+    width: '45%',
     marginVertical: 10,
   },
   text: {
@@ -79,7 +80,7 @@ export const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    marginTop: 100,
+    marginTop: 150,
     width: '80%',
   },
   inputContainer: {
@@ -101,7 +102,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#1CAAFA',
     backgroundColor: '#fff',
-    width: 200,
+    width: 300,
     fontSize: 20,
     color: "black",
     padding: 5,
@@ -110,6 +111,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     flex: 1,
+    
     height: 30,
     borderRadius: 5,
     borderWidth: 1,
@@ -153,14 +155,15 @@ export const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
-    borderWidth: 1,
-    borderColor: '#000',
-    borderRadius: 5,
     margin: 20,
     backgroundColor: "white",
+    borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#fff",
+    width: 300,
+    height: 'auto',
+    color: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -169,21 +172,15 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  modalOption: {
+    width: '100%',
+    padding: 15,
+    alignItems: 'center',
+    borderBottomWidth: 1,
+  
+  },
   modalText: {
     fontSize: 20,
     marginBottom: 20,
-  },
-  backButton: {
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 25,
-    backgroundColor: '#334EA0',
-    marginTop: 10,
-    width: '80%',
-  },
-  backButtonText: {
-    color: '#fff',
-    fontSize: 18,
   },
 });

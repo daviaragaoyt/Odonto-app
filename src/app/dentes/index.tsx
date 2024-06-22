@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   Modal,
   Alert,
-  Text,
   StatusBar,
   Image,
 } from "react-native";
@@ -53,7 +52,7 @@ export default function Index() {
     }
 
     try {
-      const response = await fetch('http:192.168.1.5//:3535/adddentes', { // Conexão com o BackEnd, adicionando a arcada dentária. *Altere o id de acordo com o da sua máquina
+      const response = await fetch('http://192.168.1.5:3535/adddentes', { // Conexão com o BackEnd, adicionando a arcada dentária. *Altere o id de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,12 +134,12 @@ export default function Index() {
     );
   }
 
-  const handleOpenModal = (index: any) => {
+  const handleOpenModal = (index:any) => {
     setSelectedDenteIndex(index);
     setModalVisible(true);
   };
 
-  const handleSelecionarNotaDente = (nota: any) => {
+  const handleSelecionarNotaDente = (nota:any) => {
     if (selectedDenteIndex !== -1) {
       const novasOpcoesDentes = [...opcoesDentes];
       novasOpcoesDentes[selectedDenteIndex] = {
@@ -206,8 +205,9 @@ export default function Index() {
                   <TouchableOpacity
                     key={nota}
                     onPress={() => handleSelecionarNotaDente(nota)}
+                    style={styles.modalOption}
                   >
-                    <Text style={styles.modalText}>{`Nota ${nota}`}</Text>
+                    <CustomText style={styles.modalText}>{`Nota ${nota}`}</CustomText>
                   </TouchableOpacity>
                 ))}
               </View>
