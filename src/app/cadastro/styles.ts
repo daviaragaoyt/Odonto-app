@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    marginTop:100,
+    marginTop: 200,
     color: '#fff',
     fontSize: 40,
     textShadowColor: '#000000',
@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 1,
   },
-  sobrenome:{
+  sobrenome: {
     color: '#fff',
     fontSize: 20,
     marginRight: 10,
@@ -43,17 +43,15 @@ export const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 1,
   },
-  textSelected:{
-    color:'#000',
+  textSelected: {
+    color: '#000',
     textShadowColor: '#fff',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 1,
-    fontSize:20,
+    fontSize: 20,
   },
-  
   formContainer: {
     flex: 1,
-
     alignItems: 'flex-start',
     marginTop: 100,
     width: '80%',
@@ -61,9 +59,7 @@ export const styles = StyleSheet.create({
   inputContainer: {
     alignItems: 'flex-start',
     flexDirection: 'row',
-
     marginBottom: 20,
-
   },
   input: {
     borderWidth: 1,
@@ -71,7 +67,7 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#fff',
     flex: 1,
-    width:200,
+    width: 200,
     height: 40,
     fontSize: 20,
     color: "black",
@@ -82,9 +78,10 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 70,
+    marginLeft:10,
     width: 300,
     padding: 15,
-    marginTop:100,
+    marginTop: 150,
     borderRadius: 10,
     borderColor: '#334EA0',
     borderWidth: 1,
@@ -103,8 +100,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-   
-    
   },
   
   modalView: {
@@ -113,11 +108,11 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    fontSize:50,
-    width:200,
-    height:200,
-    color:'#000',
-    shadowColor: "#fff",
+    fontSize: 50,
+    width: 200,
+    height: 'auto',
+    color: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2
@@ -141,7 +136,7 @@ export const styles = StyleSheet.create({
   },
   smallSquareButton: {
     position: 'absolute',
-    top: 40,
+    top: 100,
     left: 20,
     width: 40,
     height: 40,
@@ -154,11 +149,18 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
   },
-   modalOption: {
+  modalOption: {
     width: '100%',
     padding: 15,
     alignItems: 'center',
+    borderRadius:5,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+
+  },
+  modalText: {
+    fontSize: 18,
+    color: 'black',
+   
+    textAlign: 'center',
   },
 });

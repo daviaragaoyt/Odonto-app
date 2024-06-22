@@ -87,7 +87,7 @@ export default function Index() {
               CADASTRO
             </CustomText>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.inputSubmit} onPress={() => router.push('')}>
+          <TouchableOpacity style={styles.inputSubmit} onPress={() => router.push('dentes')}>
             <CustomText style={styles.buttonText}>
               ESTATÍSTICAS
             </CustomText>

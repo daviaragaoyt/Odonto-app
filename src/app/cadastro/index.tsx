@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Modal, Text, TouchableHighlight, StatusBar, Alert, Keyboard } from 'react-native';
+import { View, TextInput, TouchableOpacity, Modal, StatusBar, Alert, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import MaskInput from 'react-native-mask-input';
@@ -7,17 +7,15 @@ import CustomText from '../components/CustomText';
 import Body from '../components/Body';
 import { styles } from './styles';
 
-
 export default function Index() {
   const router = useRouter();
 
   // Hooks UseState
-  const [nome,setNome]=useState('');
+  const [nome, setNome] = useState('');
   const [cpf, setCPF] = useState('');
   const [idade, setIdade] = useState('');
   const [genero, setGenero] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-
 
   // Definindo os gêneros
   const sexo = [
@@ -28,7 +26,7 @@ export default function Index() {
 
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
-    if (!nome  || !cpf || !idade || !genero) { // Caso os campos estejam vazios
+    if (!nome || !cpf || !idade || !genero) { // Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
@@ -45,7 +43,6 @@ export default function Index() {
           cpf: cpf,
           idade: idade,
           sexo: genero,
-
         }),
       });
 
@@ -53,7 +50,6 @@ export default function Index() {
         // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
         Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
         setNome('');
-     
         setCPF('');
         setIdade('');
         setGenero('');
@@ -80,8 +76,6 @@ export default function Index() {
 
   const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]; // Modelo para o CPF
 
-
-
   const openModal = () => {
     Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
     setModalVisible(true);
@@ -95,10 +89,6 @@ export default function Index() {
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Body />
-      <View style={styles.overlayContent}>
-      <TouchableHighlight style={styles.smallSquareButton} onPress={() => router.back()}>
-        <CustomText style={styles.smallSquareButtonText}>←</CustomText>
-      </TouchableHighlight>
       <View style={styles.overlayContent}>
         <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()}>
           <CustomText style={styles.smallSquareButtonText}>←</CustomText>
@@ -166,6 +156,7 @@ export default function Index() {
               {sexo.map(item => (
                 <TouchableOpacity
                   key={item.id}
+                  style={styles.modalOption}
                   onPress={() => {
                     if (item.texto !== 'Voltar') {
                       setGenero(item.texto);
@@ -173,7 +164,7 @@ export default function Index() {
                     closeModal();
                   }}
                 >
-                  <Text>{item.texto}</Text>
+                  <CustomText style={styles.modalText}>{item.texto}</CustomText>
                 </TouchableOpacity>
               ))}
             </View>
@@ -181,6 +172,6 @@ export default function Index() {
         </Modal>
       </View>
     </View>
-    </View>
+
   );
 }
