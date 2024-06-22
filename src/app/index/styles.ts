@@ -47,12 +47,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     height: 45,
     borderRadius: 5,
-    fontSize:16,
-    color: "black",
+    fontSize: 20,
+    color: 'black',
     padding: 5,
     backgroundColor: '#f9fdfe',
-   
-    
   },
   searchButton: {
     borderWidth: 1,
@@ -84,7 +82,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 50,
     paddingHorizontal: 5,
-    backgroundColor: "#6DB1D7",
+    backgroundColor: "#6DA0D7",
   },
   buttonText: {
     color: "#fff",
