@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    height: 45,
+    height: 40,
     borderRadius: 5,
     fontSize: 20,
     color: 'black',
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
   searchButton: {
     borderWidth: 1,
     borderColor: '#334EA0',
-    height: 45,
+    height: 40,
     padding: 10,
     backgroundColor: '#6DB1D7',
     borderTopRightRadius: 5,

@@ -87,6 +87,7 @@ export const styles = StyleSheet.create({
     textAlign: 'right',
     alignItems: 'flex-start',
     flexDirection: 'row',
+    borderRadius:5,
     marginBottom: 20,
     textShadowColor: '#334EA0',
     textShadowOffset: { width: 2, height: 2 },
@@ -111,7 +112,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     flex: 1,
-    
     height: 30,
     borderRadius: 5,
     borderWidth: 1,
