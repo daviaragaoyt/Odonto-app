@@ -45,7 +45,7 @@ export default function Index() {
             nome: paciente["nome"]
           },
         });
-        
+
       } else {
         Alert.alert('Aviso', 'Paciente não encontrado');
       }
@@ -54,6 +54,7 @@ export default function Index() {
       Alert.alert('Erro', 'Erro ao buscar paciente');
     }
   };
+  
   //Mudando o Search para modificar o state do codigo paciente
   return (
     <View style={styles.container}>
@@ -102,4 +103,4 @@ export default function Index() {
       </View>
     </View>
   );
-  }
+}
