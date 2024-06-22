@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    marginTop: 150,
+    marginTop: 185,
     color: '#fff',
     fontSize: 40,
     textShadowColor: '#000000',
@@ -53,8 +53,9 @@ export const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    marginTop: 80,
+    marginTop: 70,
     width: '80%',
+    gap: 10
   },
   inputContainer: {
     alignItems: 'flex-start',
@@ -101,6 +102,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22,
   },
+  
   modalView: {
     margin: 20,
     backgroundColor: "white",

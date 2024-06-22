@@ -52,7 +52,7 @@ export default function Index() {
     }
 
     try {
-      const response = await fetch('http://192.168.1.5:3535/adddentes', { // Conexão com o BackEnd, adicionando a arcada dentária. *Altere o id de acordo com o da sua máquina
+      const response = await fetch('http:192.168.0.12/:3535/adddentes', { // Conexão com o BackEnd, adicionando a arcada dentária. *Altere o id de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export default function Index() {
   const salvarMedia = async () => {
     //Verificação de campos nulos, deletada, já que há a verificação na função de salvarDentes
     try {
-      const response = await fetch('http://192.168.1.5:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
+      const response = await fetch('http://192.168.0.12:3535/addmedia', { // Conexão com o BackEnd, adicionando a média. *Altere o id de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
