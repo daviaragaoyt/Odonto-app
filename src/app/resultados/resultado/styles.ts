@@ -7,6 +7,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   loadingContainer: {
     flex: 1,
@@ -18,9 +23,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 20,
+   
   },
   title: {
     color: "#fff",
+    marginTop:100,
     fontSize: 50,
     textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },

@@ -43,6 +43,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
+     
       <View style={styles.containerTitle}>
         <CustomText style={styles.title}>PARABÉNS!</CustomText>
       </View>
@@ -64,5 +65,6 @@ export default function Index() {
         />
       </View>
     </View>
+    
   );
 }

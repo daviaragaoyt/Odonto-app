@@ -7,6 +7,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   loadingContainer: {
     flex: 1,
@@ -25,6 +30,7 @@ export const styles = StyleSheet.create({
     textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 2,
+    marginTop:100,
   },
   text: {
     color: "#fff",
