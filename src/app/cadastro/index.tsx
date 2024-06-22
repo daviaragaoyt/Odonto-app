@@ -98,6 +98,7 @@ export default function Index() {
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Body />
+      <View style={styles.overlayContent}>
       <TouchableHighlight style={styles.smallSquareButton} onPress={() => router.back()}>
         <CustomText style={styles.smallSquareButtonText}>←</CustomText>
       </TouchableHighlight>
@@ -182,6 +183,7 @@ export default function Index() {
           </TouchableOpacity>
         </Modal>
       </View>
+    </View>
     </View>
   );
 }

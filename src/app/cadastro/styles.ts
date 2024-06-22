@@ -4,10 +4,18 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1CAAFA',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   overlayContent: {
-
-    ...StyleSheet.absoluteFillObject,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -96,6 +104,8 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
+   
+    
   },
 
   
@@ -105,6 +115,9 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
+    fontSize:50,
+    width:200,
+    height:200,
     color:'#000',
     shadowColor: "#fff",
     shadowOffset: {

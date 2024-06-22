@@ -6,6 +6,11 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1CAAFA', // Cor de fundo para garantir que não haja espaço branco
+    top:0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    position:'absolute',
   },
   overlayContent: {
     position: 'absolute',
@@ -42,7 +47,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     height: 45,
     borderRadius: 5,
-    fontSize: 20,
+    fontSize:16,
     color: "black",
     padding: 5,
     backgroundColor: '#f9fdfe',
