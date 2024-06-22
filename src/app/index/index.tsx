@@ -1,5 +1,5 @@
-import React, { useState,useCallback  } from 'react';
-import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps, StatusBar, Alert,Linking  } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps, StatusBar, Alert, Linking } from 'react-native';
 import { useRouter } from 'expo-router';
 import Feather from 'react-native-vector-icons/Feather';
 import { styles } from './styles';
@@ -11,10 +11,6 @@ interface CustomButtonProps extends TouchableOpacityProps {
   text: string;
 }
 
-//const linkExt = useCallback(() => { Linking.openURL(url) },[])
-const linkExt = useCallback(() => {
-  Linking.openURL("https://1drv.ms/x/c/48b64a126a64263a/EWkzPGxg4olCsy9ZlcAq5xABb_KK_yp0kJsobCJ7AO-_VA?e=fHMTOp")
-}, [])
 
 const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
   <TouchableOpacity {...props} style={styles.inputSubmit}>
@@ -23,6 +19,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
 );
 
 export default function Index() {
+  
+  //const linkExt = useCallback(() => { Linking.openURL(url) },[])
+  const linkExt = useCallback(() => {
+    Linking.openURL("https://1drv.ms/x/c/48b64a126a64263a/EWkzPGxg4olCsy9ZlcAq5xABb_KK_yp0kJsobCJ7AO-_VA?e=fHMTOp")
+  }, [])
+
   const router = useRouter();
   //State para cod_paciente
   const [codigoPaciente, setCodigoPaciente] = useState('');
@@ -50,7 +52,7 @@ export default function Index() {
             nome: paciente["nome"]
           },
         });
-        
+
       } else {
         Alert.alert('Aviso', 'Paciente não encontrado');
       }
@@ -87,6 +89,11 @@ export default function Index() {
           </TouchableOpacity>
         </View>
         <View style={styles.container2}>
+        <TouchableOpacity style={styles.inputSubmit} onPress={() => router.push('dentes')}>
+            <CustomText style={styles.buttonText}>
+              dentes
+            </CustomText>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.inputSubmit} onPress={() => router.push('cadastro')}>
             <CustomText style={styles.buttonText}>
               CADASTRO
@@ -107,4 +114,4 @@ export default function Index() {
       </View>
     </View>
   );
-  }
+}
