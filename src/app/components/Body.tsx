@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Centralizar conteúdo verticalmente
     width: '100%', // Largura total da tela
     padding: 20, // Espaçamento interno
-    
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
 });
 
