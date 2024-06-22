@@ -1,5 +1,5 @@
-import React, { useState,useCallback  } from 'react';
-import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps, StatusBar, Alert,Linking  } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps, StatusBar, Alert, Linking } from 'react-native';
 import { useRouter } from 'expo-router';
 import Feather from 'react-native-vector-icons/Feather';
 import { styles } from './styles';
