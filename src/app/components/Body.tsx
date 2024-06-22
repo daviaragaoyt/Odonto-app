@@ -17,7 +17,7 @@ const Body: React.FC = () => {
   if (!isLoaded) {
     return (
       <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="#1CAAFA" />
+        <ActivityIndicator size="large" color="#0668a1" />
       </View>
     );
   }
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center',
     alignItems: 'center',
+    opacity: 0.5,
   },
   overlay: {
     flex: 1,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1CAAFA', // Cor de fundo enquanto carrega
+    backgroundColor: '#0668a1', // Cor de fundo enquanto carrega
   },
 });
 
