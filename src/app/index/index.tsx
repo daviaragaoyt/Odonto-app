@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps, StatusBar, Alert } from 'react-native';
+import React, { useState,useCallback  } from 'react';
+import { View, TextInput, TouchableOpacity, Image, TouchableOpacityProps, StatusBar, Alert,Linking  } from 'react-native';
 import { useRouter } from 'expo-router';
 import Feather from 'react-native-vector-icons/Feather';
 import { styles } from './styles';
@@ -10,6 +10,11 @@ import Body from '../components/Body';
 interface CustomButtonProps extends TouchableOpacityProps {
   text: string;
 }
+
+//const linkExt = useCallback(() => { Linking.openURL(url) },[])
+const linkExt = useCallback(() => {
+  Linking.openURL("https://1drv.ms/x/c/48b64a126a64263a/EWkzPGxg4olCsy9ZlcAq5xABb_KK_yp0kJsobCJ7AO-_VA?e=fHMTOp")
+}, [])
 
 const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
   <TouchableOpacity {...props} style={styles.inputSubmit}>
@@ -88,7 +93,7 @@ export default function Index() {
               CADASTRO
             </CustomText>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.inputSubmit} onPress={() => router.push('dentes')}>
+          <TouchableOpacity style={styles.inputSubmit} onPress={linkExt}>
             <CustomText style={styles.buttonText}>
               ESTATÍSTICAS
             </CustomText>
