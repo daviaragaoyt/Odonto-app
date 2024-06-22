@@ -65,7 +65,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     width:200,
     height: 40,
-  
     fontSize: 20,
     color: "black",
     padding: 5,

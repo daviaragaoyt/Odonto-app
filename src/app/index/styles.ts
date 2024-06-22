@@ -18,8 +18,8 @@ export const styles = StyleSheet.create({
   },
   image: {
     marginTop:100,
-    width: 450,
-    height: 200,
+    width: 420,
+    height: 170,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -36,14 +36,14 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#1CAAFA',
     borderRadius: 5,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   input: {
     flex: 1,
     height: 45,
     borderRadius: 5,
     fontSize: 20,
-    color: "black",
+    color: 'black',
     padding: 5,
     backgroundColor: '#f9fdfe',
    
@@ -96,4 +96,5 @@ export const styles = StyleSheet.create({
     width: 200,
     resizeMode: 'contain',
   },
+
 });
