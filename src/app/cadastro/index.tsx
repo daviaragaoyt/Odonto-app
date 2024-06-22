@@ -26,8 +26,6 @@ export default function Index() {
     { id: 3, texto: 'Voltar' },
   ];
 
-
-
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
     if (!nome  || !cpf || !idade || !genero) { // Caso os campos estejam vazios
@@ -98,6 +96,7 @@ export default function Index() {
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Body />
+      <View style={styles.overlayContent}>
       <TouchableHighlight style={styles.smallSquareButton} onPress={() => router.back()}>
         <CustomText style={styles.smallSquareButtonText}>←</CustomText>
       </TouchableHighlight>
@@ -182,6 +181,7 @@ export default function Index() {
           </TouchableOpacity>
         </Modal>
       </View>
+    </View>
     </View>
   );
 }

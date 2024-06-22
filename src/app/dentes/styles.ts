@@ -4,6 +4,20 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1CAAFA',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  overlayContent: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   smallSquareButton: {
     position: 'absolute',
@@ -20,11 +34,7 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
   },
-  overlayContent: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  
   containerTitle: {
     alignItems: 'center',
     justifyContent: 'center',
