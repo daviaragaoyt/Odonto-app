@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    marginTop: 200,
+    marginTop: 150,
     color: '#fff',
     fontSize: 40,
     textShadowColor: '#000000',
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    marginTop: 100,
+    marginTop: 80,
     width: '80%',
   },
   inputContainer: {
@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
     marginLeft:10,
     width: 300,
     padding: 15,
-    marginTop: 150,
+    marginTop: 100,
     borderRadius: 10,
     borderColor: '#334EA0',
     borderWidth: 1,
