@@ -42,7 +42,6 @@ export default function Index() {
         // Passando os dados
         body: JSON.stringify({
           nome: nome,
-         
           cpf: cpf,
           idade: idade,
           sexo: genero,
