@@ -175,7 +175,7 @@ export const styles = StyleSheet.create({
   },
   modalOption: {
     width: '100%',
-    padding: 15,
+    padding: 8,
     alignItems: 'center',
     borderBottomWidth: 1,
   
