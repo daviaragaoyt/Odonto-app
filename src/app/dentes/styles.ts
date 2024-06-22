@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#6DB1D7',
+    backgroundColor: '#008cdc',
     borderRadius: 5,
   },
   smallSquareButtonText: {
@@ -140,7 +140,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 100,
     paddingHorizontal: 5,
-    backgroundColor: "#6DB1D7",
+    backgroundColor: "#008cdc",
   },
   buttonText: {
     color: "#fff",
