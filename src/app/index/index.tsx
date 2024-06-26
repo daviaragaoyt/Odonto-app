@@ -104,12 +104,12 @@ export default function Index() {
           </TouchableOpacity>
         </View>
         <View style={styles.logoContainer}>
-          <TouchableOpacity>
+        <TouchableOpacity onPress={pesquisa}>
           <Image
             source={require("../../../assets/images/logo.png")}
             style={styles.logo}
           />
-          </TouchableOpacity>
+        </TouchableOpacity>
         </View>
       </View>
     </View>
