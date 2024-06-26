@@ -18,12 +18,12 @@ export default function Index() {
   const { nome, codPaciente } = useLocalSearchParams();
 
   const [opcoesDentes, setOpcoesDentes] = useState([
-    { id: 1, dente: "V11", nota: null },
-    { id: 2, dente: "V16", nota: null },
-    { id: 3, dente: "V26", nota: null },
-    { id: 4, dente: "V31", nota: null },
-    { id: 5, dente: "L36", nota: null },
-    { id: 6, dente: "L46", nota: null },
+    { id: 1, dente: "V11", score: null },
+    { id: 2, dente: "V16", score: null },
+    { id: 3, dente: "V26", score: null },
+    { id: 4, dente: "V31", score: null },
+    { id: 5, dente: "L36", score: null },
+    { id: 6, dente: "L46", score: null },
   ]);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,7 +47,7 @@ export default function Index() {
   };
 
   const salvarDentes = async () => {
-    if (!codPaciente || opcoesDentes.some(dente => dente.nota === null)) {
+    if (!codPaciente || opcoesDentes.some(dente => dente.score === null)) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
@@ -59,7 +59,7 @@ export default function Index() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          Avaliacao_arcada: opcoesDentes.map(dente => dente.nota).join(','),
+          Avaliacao_arcada: opcoesDentes.map(dente => dente.score).join(','),
           fk_Paciente_Cod_Paciente: codPaciente,
           fk_Dente_Cod_dente: opcoesDentes.map(dente => dente.id).join(','),
         }),
@@ -107,8 +107,8 @@ export default function Index() {
   };
 
   const calcularMedia = () => {
-    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + (dente.nota !== null ? dente.nota : 0), 0);
-    const media = totalNotas / opcoesDentes.filter(dente => dente.nota !== null).length;
+    const totalNotas = opcoesDentes.reduce((sum, dente) => sum + (dente.score !== null ? dente.score : 0), 0);
+    const media = totalNotas / opcoesDentes.filter(dente => dente.score !== null).length;
     setMediaNotas(media);
     return media;
   };
@@ -140,12 +140,12 @@ export default function Index() {
     setModalVisible(true);
   };
 
-  const handleSelecionarNotaDente = (nota:any) => {
+  const handleSelecionarNotaDente = (score:any) => {
     if (selectedDenteIndex !== -1) {
       const novasOpcoesDentes = [...opcoesDentes];
       novasOpcoesDentes[selectedDenteIndex] = {
         ...novasOpcoesDentes[selectedDenteIndex],
-        nota,
+        score,
       };
       setOpcoesDentes(novasOpcoesDentes);
       setModalVisible(false);
@@ -184,7 +184,7 @@ export default function Index() {
                   style={styles.image}
                 />
                 <View style={styles.inputDente}>
-                  <CustomText>{dente.nota !== null ? ` ${dente.nota}` : ""}</CustomText>
+                  <CustomText>{dente.score !== null ? ` ${dente.score}` : ""}</CustomText>
                 </View>
               </TouchableOpacity>
             ))}
@@ -202,13 +202,13 @@ export default function Index() {
               onPressOut={() => setModalVisible(false)}
             >
               <View style={styles.modalView}>
-                {[0, 1, 2, 3].map((nota) => (
+                {[0, 1, 2, 3].map((score) => (
                   <TouchableOpacity
-                    key={nota}
-                    onPress={() => handleSelecionarNotaDente(nota)}
+                    key={score}
+                    onPress={() => handleSelecionarNotaDente(score)}
                     style={styles.modalOption}
                   >
-                    <CustomText style={styles.modalText}>{`Nota ${nota}`}</CustomText>
+                    <CustomText style={styles.modalText}>{`score ${score}`}</CustomText>
                   </TouchableOpacity>
                 ))}
               </View>
