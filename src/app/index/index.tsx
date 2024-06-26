@@ -23,6 +23,9 @@ export default function Index() {
   const linkExt = useCallback(() => {
     Linking.openURL("https://1drv.ms/x/c/48b64a126a64263a/EWkzPGxg4olCsy9ZlcAq5xABb_KK_yp0kJsobCJ7AO-_VA?e=fHMTOp"); //Link para a planilha Excel
   }, []);
+  const pesquisa=useCallback(()=>{
+    Linking.openURL("https://docs.google.com/forms/d/e/1FAIpQLSckPn6DoZ-c5gjOIUo64suleflwuR7AA80eS-DzVLMLTAzHNw/viewform?usp=sf_link");//Link da Pesquisa de aprovação
+},[]);
 
   const router = useRouter();
   //State para cod_paciente
@@ -101,10 +104,12 @@ export default function Index() {
           </TouchableOpacity>
         </View>
         <View style={styles.logoContainer}>
+          <TouchableOpacity>
           <Image
             source={require("../../../assets/images/logo.png")}
             style={styles.logo}
           />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
