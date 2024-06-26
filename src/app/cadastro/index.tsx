@@ -106,8 +106,8 @@ export default function Index() {
           </View>
 
           <View style={styles.inputContainer}>
-            <CustomText style={styles.text}>Matricula:</CustomText>
-            <CustomText style={styles.text}>MATRÍCULA:</CustomText>
+            <CustomText style={styles.textMatricula}>MATRÍCULA:</CustomText>
+
             <MaskInput
               keyboardType='numeric'
               placeholder='000.000.000-00'
@@ -118,6 +118,7 @@ export default function Index() {
               }}
               mask={CPF_MASK}
             />
+                     
           </View>
 
           <View style={styles.inputContainer}>

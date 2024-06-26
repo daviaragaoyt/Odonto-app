@@ -35,6 +35,14 @@ export const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 1,
   },
+  textMatricula: {
+    color: '#fff',
+    fontSize: 20,
+    marginRight: 10,
+    textShadowColor: '#000000BF',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
+  },
   sobrenome: {
     color: '#fff',
     fontSize: 20,
@@ -159,7 +167,7 @@ export const styles = StyleSheet.create({
 
   },
   modalText: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'black',
    
     textAlign: 'center',

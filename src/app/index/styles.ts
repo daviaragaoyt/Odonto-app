@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     width: '80%', // Altere aqui para garantir a largura desejada
     borderWidth: 1,
     borderColor: '#1CAAFA',
-    borderRadius: 5,
+    borderRadius: 6,
     backgroundColor: '#fff'
   },
   input: {
