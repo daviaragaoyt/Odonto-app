@@ -37,9 +37,9 @@ export default function Index() {
   const handleSubmit = async () => {
     try {
       //console.log(codPaciente);
+      navegarParaResultado();
       await salvarDentes();
       //await salvarMedia();
-      navegarParaResultado();
     } catch (error) {
       console.error('Erro ao processar: ', error);
       Alert.alert('Erro', 'Erro ao processar os dados');
