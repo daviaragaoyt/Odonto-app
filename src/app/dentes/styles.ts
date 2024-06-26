@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   title: {
+    marginTop: 20,
     marginLeft: 90,
     color: '#fff',
     fontSize: 40,

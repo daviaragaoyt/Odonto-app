@@ -60,6 +60,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#008cdc',
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
+    borderRadius: 3
   },
   container2: {
     marginTop: 20,
