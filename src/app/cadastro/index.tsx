@@ -12,7 +12,7 @@ export default function Index() {
 
   // Hooks UseState
   const [nome, setNome] = useState('');
-  const [cpf, setCPF] = useState('');
+  const [matricula, setMatricula] = useState('');
   const [idade, setIdade] = useState('');
   const [genero, setGenero] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -21,12 +21,13 @@ export default function Index() {
   const sexo = [
     { id: 1, texto: 'Feminino' },
     { id: 2, texto: 'Masculino' },
-    { id: 3, texto: 'Voltar' },
+    { id: 3, texto: 'Outros' },
+    { id: 4, texto: 'Voltar' },
   ];
 
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
-    if (!nome || !cpf || !idade || !genero) { // Caso os campos estejam vazios
+    if (!nome || !matricula || !idade || !genero) { // Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
@@ -40,7 +41,7 @@ export default function Index() {
         // Passando os dados
         body: JSON.stringify({
           nome: nome,
-          cpf: cpf,
+          matricula: matricula,
           idade: idade,
           sexo: genero,
         }),
@@ -50,7 +51,7 @@ export default function Index() {
         // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
         Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
         setNome('');
-        setCPF('');
+        setMatricula('');
         setIdade('');
         setGenero('');
         router.replace('/'); // Volta para a página Home no index
@@ -74,7 +75,7 @@ export default function Index() {
     return <View><CustomText>Carregando...</CustomText></View>;
   }
 
-  const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]; // Modelo para o CPF
+  const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]; // Modelo para o matricula
 
   const openModal = () => {
     Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
@@ -105,14 +106,14 @@ export default function Index() {
           </View>
 
           <View style={styles.inputContainer}>
-            <CustomText style={styles.text}>CPF:</CustomText>
+            <CustomText style={styles.text}>matricula:</CustomText>
             <MaskInput
               keyboardType='numeric'
               placeholder='000.000.000-00'
               style={styles.input}
-              value={cpf}
+              value={matricula}
               onChangeText={(masked, unmasked) => {
-                setCPF(masked); // store masked value in state
+                setMatricula(masked); // store masked value in state
               }}
               mask={CPF_MASK}
             />
