@@ -11,10 +11,6 @@ interface CustomButtonProps extends TouchableOpacityProps {
   text: string;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f504ff8e3ea1b1fdf5bb3e70ce974f180c38cea7
 const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
   <TouchableOpacity {...props} style={styles.inputSubmit}>
     <CustomText style={styles.buttonText}>{text}</CustomText>
@@ -22,19 +18,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
 );
 
 export default function Index() {
-<<<<<<< HEAD
   
   //const linkExt = useCallback(() => { Linking.openURL(url) },[])
   const linkExt = useCallback(() => {
     Linking.openURL("https://1drv.ms/x/c/48b64a126a64263a/EWkzPGxg4olCsy9ZlcAq5xABb_KK_yp0kJsobCJ7AO-_VA?e=fHMTOp")
   }, [])
-=======
-
-  //const linkExt = useCallback(() => { Linking.openURL(url) },[]) /
-  const linkExt = useCallback(() => {
-    Linking.openURL("https://1drv.ms/x/c/48b64a126a64263a/EWkzPGxg4olCsy9ZlcAq5xABb_KK_yp0kJsobCJ7AO-_VA?e=fHMTOp"); //Link para a planilha Excel
-  }, []);
->>>>>>> f504ff8e3ea1b1fdf5bb3e70ce974f180c38cea7
 
   const router = useRouter();
   //State para cod_paciente
