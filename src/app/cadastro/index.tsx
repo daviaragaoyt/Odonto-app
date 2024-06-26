@@ -33,7 +33,7 @@ export default function Index() {
     }
 
     try {
-      const response = await fetch('http://192.168.0.12:3535/addpaciente', { // Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
+      const response = await fetch('https://bakcend-deploy.vercel.app/addpaciente', { // Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,6 +107,7 @@ export default function Index() {
 
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>Matricula:</CustomText>
+            <CustomText style={styles.text}>MATRÍCULA:</CustomText>
             <MaskInput
               keyboardType='numeric'
               placeholder='000.000.000-00'

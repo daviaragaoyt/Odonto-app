@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "cd340a65-0717-43ff-ad54-088edc2e99f1"
+      }
+    },
+    "android": {
+      "package": "com.daviaragaoyt.odontoapp"
+    },
+    "ios": {
+      "bundleIdentifier": "com.daviaragaoyt.odontoapp"
+    }
+  }
+}
