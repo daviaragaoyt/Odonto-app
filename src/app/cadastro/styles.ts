@@ -63,11 +63,11 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
+    flex: 1,
     borderWidth: 1,
     borderColor: '#1CAAFA',
     borderRadius: 5,
     backgroundColor: '#fff',
-    flex: 1,
     width: 200,
     height: 40,
     fontSize: 20,
