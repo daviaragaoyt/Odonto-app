@@ -208,7 +208,7 @@ export default function Index() {
                     onPress={() => handleSelecionarNotaDente(score)}
                     style={styles.modalOption}
                   >
-                    <CustomText style={styles.modalText}>{`score ${score}`}</CustomText>
+                    <CustomText style={styles.modalText}>{`Score ${score}`}</CustomText>
                   </TouchableOpacity>
                 ))}
               </View>

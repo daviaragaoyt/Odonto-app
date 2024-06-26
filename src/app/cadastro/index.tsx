@@ -106,7 +106,7 @@ export default function Index() {
           </View>
 
           <View style={styles.inputContainer}>
-            <CustomText style={styles.text}>matricula:</CustomText>
+            <CustomText style={styles.text}>MATRÍCULA:</CustomText>
             <MaskInput
               keyboardType='numeric'
               placeholder='000.000.000-00'
