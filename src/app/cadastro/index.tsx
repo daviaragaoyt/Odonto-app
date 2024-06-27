@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Modal, StatusBar, Alert, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
-import MaskInput from 'react-native-mask-input';
+
 import CustomText from '../components/CustomText';
 import Body from '../components/Body';
 import { styles } from './styles';
@@ -12,7 +12,7 @@ export default function Index() {
 
   // Hooks UseState
   const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
+  const [matricula, setMatricula] = useState('');
   const [idade, setIdade] = useState('');
   const [genero, setGenero] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -27,7 +27,7 @@ export default function Index() {
 
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
-    if (!nome || !cpf || !idade || !genero) { // Caso os campos estejam vazios
+    if (!nome || !matricula || !idade || !genero) { // Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
@@ -41,7 +41,7 @@ export default function Index() {
         // Passando os dados
         body: JSON.stringify({
           nome: nome,
-          cpf: cpf,
+          cpf: matricula,
           idade: idade,
           sexo: genero,
         }),
@@ -51,7 +51,7 @@ export default function Index() {
         // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
         Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
         setNome('');
-        setCpf('');
+        setMatricula('');
         setIdade('');
         setGenero('');
         router.replace('/'); // Volta para a página Home no index
@@ -75,7 +75,7 @@ export default function Index() {
     return <View><CustomText>Carregando...</CustomText></View>;
   }
 
-  const CPF_MASK = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]; // Modelo para o cpf
+  
 
   const openModal = () => {
     Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
@@ -108,15 +108,12 @@ export default function Index() {
           <View style={styles.inputContainer}>
             <CustomText style={styles.textMatricula}>MATRÍCULA:</CustomText>
 
-            <MaskInput
+            <TextInput
               keyboardType='numeric'
-              placeholder='000.000.000-00'
               style={styles.input}
-              value={cpf}
-              onChangeText={(masked, unmasked) => {
-                setCpf(masked); // store masked value in state
-              }}
-              mask={CPF_MASK}
+              value={matricula}
+              onChangeText={setMatricula}
+              
             />
                      
           </View>

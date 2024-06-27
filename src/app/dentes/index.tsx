@@ -135,7 +135,7 @@ export default function Index() {
     );
   }
 
-  const handleOpenModal = (index:any) => {
+  const handleOpenModal = (index:number) => {
     setSelectedDenteIndex(index);
     setModalVisible(true);
   };
