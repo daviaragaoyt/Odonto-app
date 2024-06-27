@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Modal, StatusBar, Alert, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
-
 import CustomText from '../components/CustomText';
 import Body from '../components/Body';
 import { styles } from './styles';
@@ -111,9 +110,8 @@ export default function Index() {
             <TextInput
               keyboardType='numeric'
               style={styles.input}
-              value={matricula}
               onChangeText={setMatricula}
-              
+              value={matricula}
             />
                      
           </View>
