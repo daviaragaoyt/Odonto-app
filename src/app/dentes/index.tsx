@@ -66,7 +66,7 @@ export default function Index() {
       });
 
       if (response.ok) {
-        Alert.alert('Sucesso', 'Dados dos dentes salvos com sucesso!');
+       // Alert.alert('Sucesso', 'Dados dos dentes salvos com sucesso!');
         salvarMedia(); //Se salvar os dentes, é possível salvar a média também, evitando repetição de código
       } else {
         Alert.alert('Erro', 'Erro ao salvar os dados dos dentes.');
@@ -94,7 +94,7 @@ export default function Index() {
       });
 
       if (response.ok) {
-        Alert.alert('Sucesso', 'Média das notas salva com sucesso!');
+      //  Alert.alert('Sucesso', 'Média das notas salva com sucesso!');
       } else {
         Alert.alert('Erro', 'Erro ao salvar a média das notas.');
         throw new Error('Erro ao salvar a média das notas');
@@ -115,11 +115,11 @@ export default function Index() {
 
   const navegarParaResultado = () => {
     if (mediaNotas >= 0 && mediaNotas <= 1) {
-      router.push('resultados/resultado2');
+      router.push('resultados/resultado');
     } else if (mediaNotas > 1 && mediaNotas <= 2) {
       router.push('resultados/resultado1');
     } else if (mediaNotas > 2 && mediaNotas <= 3) {
-      router.push('resultados/resultado');
+      router.push('resultados/resultado2');
     }
   };
 
