@@ -5,7 +5,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { styles } from './styles';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import CustomText from '../components/CustomText';
-import Body from '../components/Body';
+import Background from '../components/Background';
 
 interface CustomButtonProps extends TouchableOpacityProps {
   text: string;
@@ -48,7 +48,7 @@ export default function Index() {
         console.log(paciente);
 
         router.push({
-          pathname: 'dentes', //Caso exista, vai para a tela de dentes
+          pathname: '/dentes', //Caso exista, vai para a tela de dentes
           params: { //Passa os parâmetros que serão recebidos pela tela de dentes
             codPaciente: paciente["cod_paciente"],
             nome: paciente["nome"]
@@ -68,7 +68,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
-      <Body />
+      <Background />
       <View style={styles.overlayContent}>
         <View style={styles.image}>
           <Image
@@ -92,7 +92,7 @@ export default function Index() {
           </TouchableOpacity>
         </View>
         <View style={styles.container2}>
-          <TouchableOpacity style={styles.inputSubmit} onPress={() => router.push('cadastro')}>
+          <TouchableOpacity style={styles.inputSubmit} onPress={() => router.push('/cadastro')}>
             <CustomText style={styles.buttonText}>
               CADASTRO
             </CustomText>

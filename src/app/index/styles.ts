@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
     borderColor: '#334EA0',
     height: 40,
     padding: 10,
-    backgroundColor: '#008cdc',
+    backgroundColor: '#334EA0',
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
     borderRadius: 3
@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 50,
     paddingHorizontal: 5,
-    backgroundColor: "#008cdc",
+    backgroundColor: "#334EA0",
   },
   buttonText: {
     color: "#fff8fa",

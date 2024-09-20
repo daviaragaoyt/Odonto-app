@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, ImageBackground, StyleSheet, StatusBar, ActivityIndicator } from 'react-native';
 import { Asset } from 'expo-asset';
-
 const Background: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-
   useEffect(() => {
     async function loadAssets() {
       await Asset.loadAsync(require('../../../assets/images/body.png'));
       setIsLoaded(true);
     }
-
     loadAssets();
   }, []);
-
   if (!isLoaded) {
     return (
       <View style={styles.loaderContainer}>
@@ -21,7 +17,6 @@ const Background: React.FC = () => {
       </View>
     );
   }
-
   return (
     <ImageBackground source={require('../../../assets/images/body.png')} style={styles.backgroundImage}>
       <StatusBar barStyle={'dark-content'} />
@@ -29,7 +24,6 @@ const Background: React.FC = () => {
     </ImageBackground>
   );
 };
-
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
@@ -53,5 +47,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#0668a1', // Cor de fundo enquanto carrega
   },
 });
-
 export default Background;

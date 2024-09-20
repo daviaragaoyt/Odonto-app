@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity, Modal, StatusBar, Alert, Keyboard } 
 import { useRouter } from 'expo-router';
 import { useFonts, LilitaOne_400Regular } from '@expo-google-fonts/lilita-one';
 import CustomText from '../components/CustomText';
-import Body from '../components/Body';
+import Background from '../components/Background';
 import { styles } from './styles';
 
 export default function Index() {
@@ -11,6 +11,7 @@ export default function Index() {
 
   // Hooks UseState
   const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
   const [matricula, setMatricula] = useState('');
   const [idade, setIdade] = useState('');
   const [genero, setGenero] = useState('');
@@ -26,39 +27,39 @@ export default function Index() {
 
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
-    if (!nome || !matricula || !idade || !genero) { // Caso os campos estejam vazios
+    if (!nome || !cpf || !matricula || !idade || !genero) { // Caso os campos estejam vazios
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
 
     try {
-      const response = await fetch('https://bakcend-deploy.vercel.app/addpaciente', { // Fazendo a conexão com o BackEnd. *Alterar o IP de acordo com o da sua máquina
+      const response = await fetch('https://bakcend-deploy.vercel.app/addpaciente', { // Fazendo a conexão com o BackEnd.
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         // Passando os dados
         body: JSON.stringify({
-          nome: nome,
-          cpf: matricula,
-          idade: idade,
+          nome,
+          cpf,
+          matricula,
+          idade,
           sexo: genero,
         }),
       });
 
       if (response.ok) {
-        // Se a resposta estiver OK, podemos prosseguir com a navegação ou outra ação necessária
         Alert.alert('Sucesso', 'Paciente cadastrado com sucesso!');
         setNome('');
+        setCpf('');
         setMatricula('');
         setIdade('');
         setGenero('');
-        router.replace('/'); // Volta para a página Home no index
+        router.replace('/dentes'); // Volta para a página Home no index
       } else {
-        // Se houve um erro na requisição, vamos verificar se a resposta não está vazia antes de tentar analisar como JSON
         const responseData = await response.text();
         const errorMessage = responseData || 'Erro ao cadastrar paciente. Por favor, tente novamente.';
-        Alert.alert('Erro', 'Esse nome já existe em nosso sistema.');
+        Alert.alert('Erro', errorMessage);
       }
     } catch (error) {
       console.error('Erro ao cadastrar paciente:', error);
@@ -74,8 +75,6 @@ export default function Index() {
     return <View><CustomText>Carregando...</CustomText></View>;
   }
 
-  
-
   const openModal = () => {
     Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
     setModalVisible(true);
@@ -88,7 +87,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
-      <Body />
+      <Background />
       <View style={styles.overlayContent}>
         <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()}>
           <CustomText style={styles.smallSquareButtonText}>←</CustomText>
@@ -105,15 +104,23 @@ export default function Index() {
           </View>
 
           <View style={styles.inputContainer}>
-            <CustomText style={styles.textMatricula}>MATRÍCULA:</CustomText>
+            <CustomText style={styles.text}>CPF:</CustomText>
+            <TextInput
+              keyboardType='numeric'
+              style={styles.input}
+              onChangeText={setCpf}  // Corrigido para setCpf
+              value={cpf}  // Corrigido para cpf
+            />
+          </View>
 
+          <View style={styles.inputContainer}>
+            <CustomText style={styles.text}>MATRÍCULA:</CustomText>
             <TextInput
               keyboardType='numeric'
               style={styles.input}
               onChangeText={setMatricula}
               value={matricula}
             />
-                     
           </View>
 
           <View style={styles.inputContainer}>
@@ -132,10 +139,6 @@ export default function Index() {
               <CustomText style={styles.textSelected}>{genero || 'Selecionar'}</CustomText>
             </TouchableOpacity>
           </View>
-
-          <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-            <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
-          </TouchableOpacity>
         </View>
 
         {/* Modal para seleção de gênero */}
@@ -168,8 +171,10 @@ export default function Index() {
             </View>
           </TouchableOpacity>
         </Modal>
+        <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
+            <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
+          </TouchableOpacity>
       </View>
     </View>
-
   );
 }

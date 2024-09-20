@@ -10,7 +10,7 @@ import {
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useFonts, LilitaOne_400Regular } from "@expo-google-fonts/lilita-one";
 import CustomText from "../components/CustomText";
-import Body from "../components/Body";
+import Background from "../components/Background";
 import { styles } from "./styles";
 
 export default function Index() {
@@ -115,11 +115,11 @@ export default function Index() {
 
   const navegarParaResultado = () => {
     if (mediaNotas >= 0 && mediaNotas <= 1) {
-      router.push('resultados/resultado');
+      router.push('/resultados/resultado');
     } else if (mediaNotas > 1 && mediaNotas <= 2) {
-      router.push('resultados/resultado1');
+      router.push('/resultados/resultado1');
     } else if (mediaNotas > 2 && mediaNotas <= 3) {
-      router.push('resultados/resultado2');
+      router.push('/resultados/resultado2');
     }
   };
 
@@ -155,7 +155,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={"dark-content"} />
-      <Body />
+      <Background />
       <View style={styles.overlayContent}>
         <TouchableOpacity style={styles.smallSquareButton} onPress={() => router.back()} >
           <CustomText style={styles.smallSquareButtonText}>←</CustomText>
