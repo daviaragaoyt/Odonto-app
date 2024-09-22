@@ -60,10 +60,12 @@ export const styles = StyleSheet.create({
     textAlign:'left',
   },
   input: {
+    alignItems:'center',
+    textAlign:'center',
     width: 300,
     height: 50,
     fontSize: 20,
-    padding: 5,
+    padding: 10,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#1CAAFA',

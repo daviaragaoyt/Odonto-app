@@ -5,7 +5,7 @@ const Background: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     async function loadAssets() {
-      await Asset.loadAsync(require('../../../assets/images/body.png'));
+      await Asset.loadAsync(require('../../../assets/images/Background.png'));
       setIsLoaded(true);
     }
     loadAssets();
@@ -18,7 +18,7 @@ const Background: React.FC = () => {
     );
   }
   return (
-    <ImageBackground source={require('../../../assets/images/body.png')} style={styles.backgroundImage}>
+    <ImageBackground source={require('../../../assets/images/Background.png')} style={styles.backgroundImage}>
       <StatusBar barStyle={'dark-content'} />
       <View style={styles.overlay} />
     </ImageBackground>
