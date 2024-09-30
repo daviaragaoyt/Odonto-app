@@ -80,6 +80,8 @@ export default function Index() {
           <TextInput
             style={styles.input}
             placeholder="Matricula do Paciente"
+            keyboardType='numeric'
+            maxLength={7}
             value={codigoPaciente}
             onChangeText={setCodigoPaciente}
           />

@@ -25,20 +25,34 @@ export default function Index() {
     { id: 4, texto: 'Voltar' },
   ];
 
+  // Função para aplicar a máscara de CPF
+  const aplicarMascaraCpf = (value: string) => {
+    // Remove tudo que não é número
+    value = value.replace(/\D/g, '');
+
+    // Aplica a máscara CPF: 000.000.000-00
+    if (value.length <= 11) {
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    }
+
+    return value;
+  };
+
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
-    if (!nome || !cpf || !matricula || !idade || !genero) { // Caso os campos estejam vazios
+    if (!nome || !cpf || !matricula || !idade || !genero) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
 
     try {
-      const response = await fetch('https://bakcend-deploy.vercel.app/addpaciente', { // Fazendo a conexão com o BackEnd.
+      const response = await fetch('https://bakcend-deploy.vercel.app/addpaciente', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        // Passando os dados
         body: JSON.stringify({
           nome,
           cpf,
@@ -55,7 +69,15 @@ export default function Index() {
         setMatricula('');
         setIdade('');
         setGenero('');
-        router.replace('/dentes'); // Volta para a página Home no index
+
+        // Redirecionar para a outra rota com o nome e a matrícula
+        router.push({
+          pathname: '/dentes',
+          params: {
+            nome: nome,
+            codPaciente: matricula, // Aqui você pode passar a matrícula como o código do paciente
+          },
+        });
       } else {
         const responseData = await response.text();
         const errorMessage = responseData || 'Erro ao cadastrar paciente. Por favor, tente novamente.';
@@ -76,7 +98,7 @@ export default function Index() {
   }
 
   const openModal = () => {
-    Keyboard.dismiss(); // Fechar o teclado antes de abrir o modal
+    Keyboard.dismiss();
     setModalVisible(true);
   };
 
@@ -108,8 +130,9 @@ export default function Index() {
             <TextInput
               keyboardType='numeric'
               style={styles.input}
-              onChangeText={setCpf}  // Corrigido para setCpf
-              value={cpf}  // Corrigido para cpf
+              onChangeText={(value) => setCpf(aplicarMascaraCpf(value))}
+              value={cpf}
+              maxLength={14} // Limita a entrada para 14 caracteres (formato: 000.000.000-00)
             />
           </View>
 
@@ -118,8 +141,13 @@ export default function Index() {
             <TextInput
               keyboardType='numeric'
               style={styles.input}
-              onChangeText={setMatricula}
+              onChangeText={(value) => {
+                // Limita a entrada para apenas 7 números
+                const formattedValue = value.replace(/\D/g, '').slice(0, 7);
+                setMatricula(formattedValue);
+              }}
               value={matricula}
+              maxLength={7} // Limita a entrada para 7 caracteres
             />
           </View>
 
@@ -141,7 +169,6 @@ export default function Index() {
           </View>
         </View>
 
-        {/* Modal para seleção de gênero */}
         <Modal
           animationType="slide"
           transparent={true}
@@ -171,9 +198,10 @@ export default function Index() {
             </View>
           </TouchableOpacity>
         </Modal>
+
         <TouchableOpacity style={styles.inputSubmit} onPress={handleSubmit}>
-            <CustomText style={styles.buttonText}>CADASTRAR </CustomText>
-          </TouchableOpacity>
+          <CustomText style={styles.buttonText}>CADASTRAR</CustomText>
+        </TouchableOpacity>
       </View>
     </View>
   );
