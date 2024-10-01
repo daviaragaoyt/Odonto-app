@@ -19,13 +19,25 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
 
 export default function Index() {
 
+  const [appDisponivel, setAppDisponivel] = useState(() => {
+    const startDate = new Date('2024-09-01T00:00:00-03:00'); // Data de início
+    const endDate = new Date('2024-10-02T23:59:59-03:00'); // Data de fim
+    const currentDate = new Date(); // Data atual
+
+    // Verificando se a data atual está dentro do período
+    if (currentDate < startDate || currentDate > endDate) {
+      // Alert.alert("Erro!", "Servidor fora do ar");
+      return false
+    }
+    return true
+  })
   //const linkExt = useCallback(() => { Linking.openURL(url) },[]) /
   const linkExt = useCallback(() => {
     Linking.openURL("https://1drv.ms/x/c/48b64a126a64263a/EWkzPGxg4olCsy9ZlcAq5xABb_KK_yp0kJsobCJ7AO-_VA?e=fHMTOp"); //Link para a planilha Excel
   }, []);
-  const pesquisa=useCallback(()=>{
+  const pesquisa = useCallback(() => {
     Linking.openURL("https://docs.google.com/forms/d/e/1FAIpQLSckPn6DoZ-c5gjOIUo64suleflwuR7AA80eS-DzVLMLTAzHNw/viewform?usp=sf_link");//Link da Pesquisa de aprovação
-},[]);
+  }, []);
 
   const router = useRouter();
   //State para cod_paciente
@@ -37,6 +49,22 @@ export default function Index() {
 
   if (!fontsLoaded) {
     return <View><CustomText>Carregando...</CustomText></View>;
+  }
+  if (!appDisponivel) {
+    return (
+      <View style={styles.container}>
+        <StatusBar barStyle={'dark-content'} />
+        <Background />
+        <View style={styles.overlayContent}>
+        <CustomText style={styles.buttonText}>
+          App Indisponivel.
+        </CustomText>
+        <CustomText style={styles.buttonText}>
+          Volte Novamente Mais Tarde.
+        </CustomText>
+        </View>
+      </View>
+    )
   }
 
   //Função de buscar o código do paciente
@@ -63,7 +91,8 @@ export default function Index() {
       Alert.alert('Erro', 'Erro ao buscar paciente');
     }
   };
-  
+
+
   //Mudando o Search para modificar o state do codigo paciente
   return (
     <View style={styles.container}>
@@ -106,12 +135,12 @@ export default function Index() {
           </TouchableOpacity>
         </View>
         <View style={styles.logoContainer}>
-        <TouchableOpacity onPress={pesquisa}>
-          <Image
-            source={require("../../../assets/images/logo.png")}
-            style={styles.logo}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity onPress={pesquisa}>
+            <Image
+              source={require("../../../assets/images/logo.png")}
+              style={styles.logo}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </View>

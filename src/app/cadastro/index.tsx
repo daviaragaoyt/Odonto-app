@@ -42,6 +42,7 @@ export default function Index() {
 
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
+
     if (!nome || !cpf || !matricula || !idade || !genero) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
