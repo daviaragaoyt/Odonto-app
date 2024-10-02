@@ -76,7 +76,7 @@ export default function Index() {
           pathname: '/dentes',
           params: {
             nome: nome,
-            codPaciente: matricula, // Aqui você pode passar a matrícula como o código do paciente
+            matricula: matricula,
           },
         });
       } else {

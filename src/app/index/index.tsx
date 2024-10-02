@@ -19,9 +19,9 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
 
 export default function Index() {
 
-  const [appDisponivel, setAppDisponivel] = useState(() => {
-    const startDate = new Date('2024-09-01T00:00:00-03:00'); // Data de início
-    const endDate = new Date('2024-10-02T23:59:59-03:00'); // Data de fim
+  const [appDisponivel, _] = useState(() => {
+    const startDate = new Date('2024-10-03T00:00:00-03:00'); // Data de início
+    const endDate = new Date('2024-10-03T23:59:59-03:00'); // Data de fim
     const currentDate = new Date(); // Data atual
 
     // Verificando se a data atual está dentro do período
@@ -31,6 +31,7 @@ export default function Index() {
     }
     return true
   })
+  
   //const linkExt = useCallback(() => { Linking.openURL(url) },[]) /
   const linkExt = useCallback(() => {
     Linking.openURL("https://1drv.ms/x/c/48b64a126a64263a/EWkzPGxg4olCsy9ZlcAq5xABb_KK_yp0kJsobCJ7AO-_VA?e=fHMTOp"); //Link para a planilha Excel
@@ -41,7 +42,7 @@ export default function Index() {
 
   const router = useRouter();
   //State para cod_paciente
-  const [codigoPaciente, setCodigoPaciente] = useState('');
+  const [matricula, setMatricula] = useState('');
 
   let [fontsLoaded] = useFonts({
     LilitaOne_400Regular,
@@ -70,16 +71,15 @@ export default function Index() {
   //Função de buscar o código do paciente
   const handleSearch = async () => {
     try {
-      const response = await fetch(`https://bakcend-deploy.vercel.app/paciente/${codigoPaciente}`); //Conexão com o BackEnd para fazer uma busca se existe o código do paciente inserido na home
+      const response = await fetch(`https://bakcend-deploy.vercel.app/paciente/${matricula}`); //Conexão com o BackEnd para fazer uma busca se existe o código do paciente inserido na home
       if (response.ok) {
-        const paciente = await response.json();
-        console.log(paciente);
+        const data = await response.json();
 
         router.push({
           pathname: '/dentes', //Caso exista, vai para a tela de dentes
           params: { //Passa os parâmetros que serão recebidos pela tela de dentes
-            codPaciente: paciente["cod_paciente"],
-            nome: paciente["nome"]
+            matricula: data.matricula,
+            
           },
         });
 
@@ -111,8 +111,8 @@ export default function Index() {
             placeholder="Matricula do Paciente"
             keyboardType='numeric'
             maxLength={7}
-            value={codigoPaciente}
-            onChangeText={setCodigoPaciente}
+            value={matricula}
+            onChangeText={setMatricula}
           />
           <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
             <Feather

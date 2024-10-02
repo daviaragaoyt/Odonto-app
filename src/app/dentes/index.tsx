@@ -13,10 +13,19 @@ import CustomText from "../components/CustomText";
 import Background from "../components/Background";
 import { styles } from "./styles";
 
+interface Paciente {
+  cod_paciente: number;
+  nome: string;
+  idade: number;
+  sexo: string;
+  cpf: string;
+  matricula: number;
+}
+
 export default function Index() {
   const router = useRouter();
-  const { nome, codPaciente } = useLocalSearchParams();
-
+  const { matricula } = useLocalSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [opcoesDentes, setOpcoesDentes] = useState([
     { id: 1, dente: "V11", score: null },
@@ -30,16 +39,40 @@ export default function Index() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDenteIndex, setSelectedDenteIndex] = useState(-1);
   const [mediaNotas, setMediaNotas] = useState(0);
+  const [paciente, setPaciente] = useState<Paciente | null>()
 
   useEffect(() => {
     calcularMedia();
   }, [opcoesDentes]);
 
+  useEffect(() => {
+    const fetchPaciente = async () => {
+      if (!matricula) return;
+      try {
+        setIsLoading(true)
+        const response = await fetch(`https://bakcend-deploy.vercel.app/paciente/${matricula}`);
+
+        if (!response.ok) {
+          const errorData = await response.text();
+          throw new Error(`Erro ao buscar os dados do paciente: ${errorData}`);
+        }
+
+        const data = await response.json()
+        setIsLoading(false)
+        setPaciente(data)
+      } catch {
+        setIsLoading(false)
+        console.log('Deu ruim!')
+      }
+    };
+
+    fetchPaciente();
+  }, []);
+
   const handleSubmit = async () => {
     try {
-      //console.log(codPaciente);
-      navegarParaResultado();
       await salvarDentes();
+      navegarParaResultado();
       //await salvarMedia();
     } catch (error) {
       console.error('Erro ao processar: ', error);
@@ -48,7 +81,7 @@ export default function Index() {
   };
 
   const salvarDentes = async () => {
-    if (!codPaciente || opcoesDentes.some(dente => dente.score === null)) {
+    if (!matricula || opcoesDentes.some(dente => dente.score === null)) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
@@ -61,7 +94,7 @@ export default function Index() {
         },
         body: JSON.stringify({
           Avaliacao_arcada: opcoesDentes.map(dente => dente.score).join(','),
-          fk_Paciente_Cod_Paciente: codPaciente,
+          fk_Paciente_Cod_Paciente: paciente?.cod_paciente,
           fk_Dente_Cod_dente: opcoesDentes.map(dente => dente.id).join(','),
         }),
       });
@@ -90,7 +123,7 @@ export default function Index() {
         },
         body: JSON.stringify({
           media: mediaNotas.toFixed(2),
-          cod_paciente: codPaciente,
+          cod_paciente: paciente?.cod_paciente,
         }),
       });
 
@@ -129,6 +162,7 @@ export default function Index() {
   });
 
   if (!fontsLoaded) {
+
     return (
       <View>
         <CustomText>Carregando...</CustomText>
@@ -153,6 +187,18 @@ export default function Index() {
     }
   };
 
+  if (!paciente) {
+    return (
+      <View style={styles.container}>
+        <StatusBar barStyle={"dark-content"} />
+        <Background />
+        <View style={styles.overlayContent}>
+          <CustomText style={styles.text}>{isLoading ? "Carregando..." : "Paciente não encontrado!"}</CustomText>
+        </View>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle={"dark-content"} />
@@ -164,11 +210,11 @@ export default function Index() {
         <View style={styles.formContainer}>
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>NOME:</CustomText>
-            <CustomText style={styles.input}>{nome}</CustomText>
+            <CustomText style={styles.input}>{paciente?.nome}</CustomText>
           </View>
           <View style={styles.inputContainer}>
             <CustomText style={styles.text}>MATRICULA:</CustomText>
-            <CustomText style={styles.input}>{codPaciente}</CustomText>
+            <CustomText style={styles.input}>{paciente?.matricula}</CustomText>
           </View>
           <CustomText style={styles.title}>DENTES</CustomText>
 
