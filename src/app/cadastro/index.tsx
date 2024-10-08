@@ -27,24 +27,63 @@ export default function Index() {
 
   // Função para aplicar a máscara de CPF
   const aplicarMascaraCpf = (value: string) => {
-    // Remove tudo que não é número
     value = value.replace(/\D/g, '');
-
-    // Aplica a máscara CPF: 000.000.000-00
     if (value.length <= 11) {
       value = value.replace(/(\d{3})(\d)/, '$1.$2');
       value = value.replace(/(\d{3})(\d)/, '$1.$2');
       value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     }
-
     return value;
+  };
+
+  // Função para validar CPF
+  const validarCpf = (cpf: string) => {
+    cpf = cpf.replace(/\D/g, '');
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+      return false;
+    }
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+      soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.charAt(9))) {
+      return false;
+    }
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+      soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.charAt(10))) {
+      return false;
+    }
+    return true;
+  };
+
+  // Função para filtrar apenas letras para o nome
+  const handleNomeChange = (value: string) => {
+    const apenasLetras = value.replace(/[^A-Za-zÀ-ÿ\s]/g, ''); // Remove tudo que não é letra ou espaço
+    setNome(apenasLetras);
   };
 
   // Função para quando o botão cadastrar for acionado
   const handleSubmit = async () => {
-
     if (!nome || !cpf || !matricula || !idade || !genero) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      return;
+    }
+
+    if (!validarCpf(cpf)) {
+      Alert.alert("Erro", "CPF inválido. Por favor, verifique e tente novamente.");
+      return;
+    }
+
+    const idadeNum = parseInt(idade);
+    if (isNaN(idadeNum) || idadeNum < 2 || idadeNum > 99) {
+      Alert.alert("Erro", "A idade deve estar entre 2 e 99 anos.");
       return;
     }
 
@@ -70,8 +109,6 @@ export default function Index() {
         setMatricula('');
         setIdade('');
         setGenero('');
-
-        // Redirecionar para a outra rota com o nome e a matrícula
         router.push({
           pathname: '/dentes',
           params: {
@@ -121,7 +158,7 @@ export default function Index() {
             <CustomText style={styles.text}>NOME:</CustomText>
             <TextInput
               style={styles.input}
-              onChangeText={setNome}
+              onChangeText={handleNomeChange} // Chama a função que filtra apenas letras
               value={nome}
             />
           </View>
@@ -133,7 +170,7 @@ export default function Index() {
               style={styles.input}
               onChangeText={(value) => setCpf(aplicarMascaraCpf(value))}
               value={cpf}
-              maxLength={14} // Limita a entrada para 14 caracteres (formato: 000.000.000-00)
+              maxLength={14}
             />
           </View>
 
@@ -143,12 +180,11 @@ export default function Index() {
               keyboardType='numeric'
               style={styles.input}
               onChangeText={(value) => {
-                // Limita a entrada para apenas 7 números
                 const formattedValue = value.replace(/\D/g, '').slice(0, 7);
                 setMatricula(formattedValue);
               }}
               value={matricula}
-              maxLength={7} // Limita a entrada para 7 caracteres
+              maxLength={7}
             />
           </View>
 

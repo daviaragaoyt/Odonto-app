@@ -19,18 +19,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({ text, ...props }) => (
 
 export default function Index() {
 
-  const [appDisponivel, _] = useState(() => {
-    const startDate = new Date('2024-10-03T00:00:00-03:00'); // Data de início
-    const endDate = new Date('2024-10-03T23:59:59-03:00'); // Data de fim
-    const currentDate = new Date(); // Data atual
-
-    // Verificando se a data atual está dentro do período
-    if (currentDate < startDate || currentDate > endDate) {
-      // Alert.alert("Erro!", "Servidor fora do ar");
-      return false
-    }
-    return true
-  })
+  
   
   //const linkExt = useCallback(() => { Linking.openURL(url) },[]) /
   const linkExt = useCallback(() => {
@@ -51,22 +40,7 @@ export default function Index() {
   if (!fontsLoaded) {
     return <View><CustomText>Carregando...</CustomText></View>;
   }
-  if (!appDisponivel) {
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle={'dark-content'} />
-        <Background />
-        <View style={styles.overlayContent}>
-        <CustomText style={styles.buttonText}>
-          App Indisponivel.
-        </CustomText>
-        <CustomText style={styles.buttonText}>
-          Volte Novamente Mais Tarde.
-        </CustomText>
-        </View>
-      </View>
-    )
-  }
+
 
   //Função de buscar o código do paciente
   const handleSearch = async () => {

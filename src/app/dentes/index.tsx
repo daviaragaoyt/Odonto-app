@@ -93,9 +93,9 @@ export default function Index() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          Avaliacao_arcada: opcoesDentes.map(dente => dente.score).join(','),
-          fk_Paciente_Cod_Paciente: paciente?.cod_paciente,
-          fk_Dente_Cod_dente: opcoesDentes.map(dente => dente.id).join(','),
+          avaliacao_arcada: opcoesDentes.map(dente => dente.score).join(','),
+          fk_paciente_cod_paciente: paciente?.cod_paciente,
+          fk_dente_cod_dente: opcoesDentes.map(dente => dente.id).join(','),
         }),
       });
 
