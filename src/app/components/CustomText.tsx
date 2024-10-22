@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
   textSelected:{
     fontFamily: 'LilitaOne_400Regular',
   },
+  
+  
 });
 
 export default CustomText;
